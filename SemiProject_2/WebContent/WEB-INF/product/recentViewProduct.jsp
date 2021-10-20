@@ -108,8 +108,8 @@
 		}
 		else{
 			// 자바스크립트에서 페이지 이동 (최근본상품->주문하기)
-			location.href = "<%= request.getContextPath()%>/order/orderForm.go?userid=${sessionScope.loginuser.userid}&opseq="+opseq;
-			//																  // ##################################뿌잉##################################
+			location.href = "<%= request.getContextPath()%>/order/orderForm.go?userid=leess&opseq="+opseq;
+			//																  // ##############${sessionScope.loginuser.userid}####################뿌잉##################################
 		}
 		
 	}// end of function goOrderForm(recentseq)----------------------------------
