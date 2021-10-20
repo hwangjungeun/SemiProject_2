@@ -5,8 +5,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
+import member.model.MemberVO_OHJ;
 import product.model.InterProductDAO_LCE;
 import product.model.OptionVO_LCE;
 import product.model.ProductDAO_LCE;
@@ -51,10 +53,10 @@ public class ProductDetailAction_LCE extends AbstractController {
 				///////현지님////////
 
 				// 최근본상품 리스트에 해당 제품을 insert/update해야함.
-	//			HttpSession session = request.getSession();
-	//			MemberVO_OHJ loginuser = (MemberVO_OHJ)session.getAttribute("loginuser");
-	//			String userid = loginuser.getUserid();
-				String userid = "eomjh"; // ##이 부분 나중에 지워줘야함.#########################################################################
+				HttpSession session = request.getSession();
+				MemberVO_OHJ loginuser = (MemberVO_OHJ)session.getAttribute("loginuser");
+				String userid = loginuser.getUserid();
+				//String userid = "eomjh"; // ########################뿌잉###########################
 				
 				pdao.insertRecentViewProd(userid,pseq);
 				

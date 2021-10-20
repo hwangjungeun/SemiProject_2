@@ -230,7 +230,7 @@
 							
 							alert("관심상품이 등록되었습니다.");
 							// 위시리스트 목록에 담았으면 위시리스트로 이동해야함. -> get방식으로 userid를 넘김.
-							location.href = "<%= request.getContextPath()%>/mypage/wishList.go?userid=eomjh"; // 이부분은 나중에  ${sessionScope.loginuser.userid}로 고쳐야함!!########################
+							location.href = "<%= request.getContextPath()%>/mypage/wishList.go?userid=${sessionScope.loginuser.userid}"; // ########################뿌잉########################
 							
 						}
 						else{
@@ -294,8 +294,8 @@
 			//	alert("주문서로 갈수있습니다~~");
 				
 				// 자바스크립트에서 페이지 이동 (상세페이지->주문하기)
-				location.href = "<%= request.getContextPath()%>/order/orderForm.go?userid=eomjh&opseq="+str_opseq+"&cnt="+str_oqty;
-				//																   userid=${(sessionScope.loginuser).userid}로 나중에 변경해야함##################################
+				location.href = "<%= request.getContextPath()%>/order/orderForm.go?userid=${(sessionScope.loginuser).userid}&opseq="+str_opseq+"&cnt="+str_oqty;
+				//																   ##################################뿌잉##################################
 				
 			}
 				
