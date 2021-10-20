@@ -23,11 +23,11 @@ public class OrderFormAction extends AbstractController {
 			// 로그인을 했으면
 		*/	
 	//		String userid = request.getParameter("userid"); // 주소창에 넘어온 userid
-String userid = "leess";
-/*			HttpSession session = request.getSession();
+
+			HttpSession session = request.getSession();
 			MemberVO_PJW loginuser = (MemberVO_PJW)session.getAttribute("loginuser");
 			String userid = loginuser.getUserid();
-*/		/*	if(loginuser.getUserid().equals(userid)) { // 로그인을 했으니 MemberVO는 null이 아님
+		/*	if(loginuser.getUserid().equals(userid)) { // 로그인을 했으니 MemberVO는 null이 아님
 				// 로그인한 사용자가 자신의 주문을 하는 경우
 		*/	
 				Map<String,String> map = null;

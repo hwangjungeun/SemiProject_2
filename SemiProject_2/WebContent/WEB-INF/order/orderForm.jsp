@@ -563,7 +563,7 @@
 	// 사용가능한 포인트보여주는 팝업창 띄우기
 	function showUsablePoint(){
 		
-		var url = "<%= request.getContextPath()%>/order/showUsablePoint.go?userid=leess"; // ##${sessionScope.loginuser.userid}################################뿌잉##################################
+		var url = "<%= request.getContextPath()%>/order/showUsablePoint.go?userid=${sessionScope.loginuser.userid}"; // ##################################뿌잉##################################
 		
 		window.open(url, "showUsablePoint",
         			"left=350px, top=100px, width=650px, height=570px"); // window.open이 팝업창 띄우는거다.
