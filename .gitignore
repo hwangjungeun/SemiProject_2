@@ -21,3 +21,17 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+
+#라이브러리
+*.js
+*.css
+*.map
+
+#공동작업
+*.sql
+/SemiProject_2/src/common/controller/AbstractController.java
+/SemiProject_2/src/common/controller/FrontController.java
+/SemiProject_2/WebContent/WEB-INF/Command.properties
+/SemiProject_2/WebContent/WEB-INF/header.jsp
+/SemiProject_2/WebContent/WEB-INF/footer.jsp
