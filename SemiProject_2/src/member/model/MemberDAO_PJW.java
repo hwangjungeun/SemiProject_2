@@ -77,81 +77,92 @@ public class MemberDAO_PJW implements InterMemberDAO_PJW {
 		try {
 			conn= ds.getConnection();
 			
-			 String sql = "SELECT "+
-					 "    userid, "+
-					 "    name, "+
-					 "    email, "+
-					 "    mobile, "+
-					 "    postcode, "+
-					 "    address, "+
-					 "    detailaddress, "+
-					 "    extraaddress, "+
-					 "    birthyyyy, "+
-					 "    birthmm, "+
-					 "    birthdd, "+
-					 "    height, "+
-					 "    weight, "+
-					 "    topsize, "+
-					 "    bottomsize, "+
-					 "    registerday, "+
-					 "    point, "+
-					 "    usepoint, "+
-					 "    pwdchangegap, "+
-					 "    nvl(lastlogingap, trunc(months_between(sysdate, registerday))) AS lastlogingap "+
-					 "FROM "+
-					 "         ( "+
-					 "        SELECT "+
-					 "            userid, "+
-					 "            name, "+
-					 "            email, "+
-					 "            mobile, "+
-					 "            postcode, "+
-					 "            address, "+
-					 "            detailaddress, "+
-					 "            extraaddress, "+
-					 "            substr(birthday, 1, 4)                                    AS birthyyyy, "+
-					 "            substr(birthday, 6, 2)                                    AS birthmm, "+
-					 "            substr(birthday, 9)                                       AS birthdd, "+
-					 "            height, "+
-					 "            weight, "+
-					 "            topsize, "+
-					 "            bottomsize, "+
-					 "            registerday, "+
-					 "            trunc(months_between(sysdate, lastpwdchangedate))         AS pwdchangegap "+
-					 "        FROM "+
-					 "            tbl_member "+
-					 "        WHERE "+
-					 "                status = 1 "+
-					 "            AND userid = ? "+
-					 "            AND pwd = ? "+
-					 "    ) m "+
-					 "    CROSS JOIN ( "+
-					 "        SELECT "+
-					 "            trunc(months_between(sysdate, MAX(logindate))) AS lastlogingap "+
-					 "        FROM "+
-					 "            tbl_loginhistory "+
-					 "        WHERE "+
-					 "            fk_userid = ? "+
-					 "    )  h "+
-					 "    CROSS JOIN ( "+
-					 "        SELECT "+
-					 "            SUM(point) AS point "+
-					 "        FROM "+
-					 "            tbl_point "+
-					 "        WHERE "+
-					 "                fk_userid = ? "+
-					 "            AND p_status = 0 "+
-					 "            AND p_idle = 0 "+
-					 "    )  p "+
-					 "    CROSS JOIN ( "+
-					 "        SELECT "+
-					 "            SUM(point) AS usepoint "+
-					 "        FROM "+
-					 "            tbl_point "+
-					 "        WHERE "+
-					 "                fk_userid = ? "+
-					 "            AND p_status = 1 "+
-					 "    )  p_u ";
+			String sql = "SELECT "+
+					"    userid, "+
+					"    name, "+
+					"    email, "+
+					"    mobile, "+
+					"    postcode, "+
+					"    address, "+
+					"    detailaddress, "+
+					"    extraaddress, "+
+					"    birthyyyy, "+
+					"    birthmm, "+
+					"    birthdd, "+
+					"    height, "+
+					"    weight, "+
+					"    topsize, "+
+					"    bottomsize, "+
+					"    registerday, "+
+					"    point, "+
+					"    usepoint, "+
+					"    point_cn, "+
+					"    pwdchangegap, "+
+					"    nvl(lastlogingap, trunc(months_between(sysdate, registerday))) AS lastlogingap "+
+					"FROM "+
+					"         ( "+
+					"        SELECT "+
+					"            userid, "+
+					"            name, "+
+					"            email, "+
+					"            mobile, "+
+					"            postcode, "+
+					"            address, "+
+					"            detailaddress, "+
+					"            extraaddress, "+
+					"            substr(birthday, 1, 4)                                    AS birthyyyy, "+
+					"            substr(birthday, 6, 2)                                    AS birthmm, "+
+					"            substr(birthday, 9)                                       AS birthdd, "+
+					"            height, "+
+					"            weight, "+
+					"            topsize, "+
+					"            bottomsize, "+
+					"            registerday, "+
+					"            trunc(months_between(sysdate, lastpwdchangedate))         AS pwdchangegap "+
+					"        FROM "+
+					"            tbl_member "+
+					"        WHERE "+
+					"                status = 1 "+
+					"            AND userid = ? "+
+					"            AND pwd = ? "+
+					"    ) m "+
+					"    CROSS JOIN ( "+
+					"        SELECT "+
+					"            trunc(months_between(sysdate, MAX(logindate))) AS lastlogingap "+
+					"        FROM "+
+					"            tbl_loginhistory "+
+					"        WHERE "+
+					"            fk_userid = ? "+
+					"    )  h "+
+					"    CROSS JOIN ( "+
+					"        SELECT "+
+					"            SUM(point) AS point "+
+					"        FROM "+
+					"            tbl_point "+
+					"        WHERE "+
+					"                fk_userid = ? "+
+					"            AND p_status = 0 "+
+					"            AND p_idle = 0 "+
+					"    )  p "+
+					"    CROSS JOIN ( "+
+					"        SELECT "+
+					"            SUM(point) AS usepoint "+
+					"        FROM "+
+					"            tbl_point "+
+					"        WHERE "+
+					"                fk_userid = ? "+
+					"            AND p_status = 1 "+
+					"    )  p_u "+
+					"    CROSS JOIN ( "+
+					"        SELECT "+
+					"            nvl(SUM(point), 0) AS point_cn "+
+					"        FROM "+
+					"            tbl_point "+
+					"        WHERE "+
+					"                fk_userid = ? "+
+					"            AND p_status = 0 "+
+					"            AND trunc(sysdate - start_day) < 0 "+
+					"    )  p_n ";
 					 
 			
 			pstmt = conn.prepareStatement(sql);
@@ -160,7 +171,7 @@ public class MemberDAO_PJW implements InterMemberDAO_PJW {
 			pstmt.setString(3, paraMap.get("userid"));
 			pstmt.setString(4, paraMap.get("userid"));
 			pstmt.setString(5, paraMap.get("userid"));
-			
+			pstmt.setString(6, paraMap.get("userid"));
 			
 			rs= pstmt.executeQuery();
 			
@@ -182,16 +193,17 @@ public class MemberDAO_PJW implements InterMemberDAO_PJW {
 	            member.setRegisterday(rs.getString(16));
 	            member.setPoint(rs.getInt(17));
 	            member.setUsepoint(rs.getInt(18));
+	            member.setPoint_cn(rs.getInt(19));
 	          
 	  
-	            if(rs.getInt(19) >= 3) {
+	            if(rs.getInt(20) >= 3) {
 	            	// 마지막으로 암호를 변경한 날짜가 현재시각으로 부터 3개월이 지났으면 true
 	                // 마지막으로 암호를 변경한 날짜가 현재시각으로 부터 3개월이 지나지 않았으면 false
 	            	
 	            	member.setRequirePwdChange(true);
 	            	// 로그인시 암호를 변경해라는 alert 를 띄우도록 할때 사용한다.
 	            }
-	            if (rs.getInt(20) >= 12) {
+	            if (rs.getInt(21) >= 12) {
 	            	// 마지막으로 로그인 한 날짜시간이 현재시각으로 부터 1년이 지났으면 휴면으로 지정
 	            	
 	            	member.setIdle(1);

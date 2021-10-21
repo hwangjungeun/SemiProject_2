@@ -279,13 +279,13 @@
 <div id = "myinfo" class="xans-element- xans-myshop xans-myshop-asyncbankbook ec-base-box gHalf">
 	<ul>
 		<li class=" ">
-            <span class="title">가용적립금</span>
+            <span class="title">가용적립금  &#58;</span>
             &nbsp;
             <strong class="data"><span id="xans_myshop_bankbook_total_mileage">${sessionScope.loginuser.point}원</span></strong>
             
         
         <li class="">
-            <strong class="title">사용적립금</strong>
+            <strong class="title">사용적립금 &#58;</strong>
             <strong class="data"><span id="xans_myshop_bankbook_used_mileage">${sessionScope.loginuser.usepoint}원</span></strong>
         </li>
             
@@ -293,8 +293,13 @@
        <div id = "myinfo2" class="xans-element- xans-myshop xans-myshop-asyncbankbook ec-base-box gHalf">
         <ul>
         	<li class="">
-            <strong class="title">총적립금</strong>
-            <strong class="data"><span id="xans_myshop_bankbook_total_mileage">${sessionScope.loginuser.point}원</span></strong>
+            <strong class="title">미가용 적립금  &#58;</strong>
+            <strong class="data"><span id="xans_myshop_bankbook_total_mileage">${sessionScope.loginuser.point_cn}원</span></strong>
+        	</li>
+        
+        
+        	<li class="">
+            <strong class="title">총적립금  &#58;</strong>
         	<a href="<%= ctxPath %>/mypage/pointList.go?userid=${sessionScope.loginuser.userid}" class="btnNormal">조회</a>
         	</li>
 	        

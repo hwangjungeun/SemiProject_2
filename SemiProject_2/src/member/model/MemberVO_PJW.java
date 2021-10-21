@@ -19,7 +19,10 @@ public class MemberVO_PJW {
 	   private String bottomsize;		  // 하의 사이즈
 	   private int point;				  // 포인트
 	   private int usepoint;			  // 사용한 포인트
-	   private String registerday;        // 가입일자 
+	   private int point_cn;              // 미가용포인트
+	   
+
+	private String registerday;        // 가입일자 
 	   private String lastpwdchangedate;  // 마지막으로 암호를 변경한 날짜  
 	   private int status;                // 회원탈퇴유무   1: 사용가능(가입중) / 0:사용불능(탈퇴) 
 	   private int idle;                  // 휴면유무         0: 활동중  /  1 : 휴면중 
@@ -179,6 +182,14 @@ public class MemberVO_PJW {
 		
 		public int getUsepoint() {
 			return usepoint;
+		}
+		
+		public int getPoint_cn() {
+			return point_cn;
+		}
+
+		public void setPoint_cn(int point_cn) {
+			this.point_cn = point_cn;
 		}
 		
 		public String getRegisterday() {

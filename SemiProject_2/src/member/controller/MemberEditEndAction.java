@@ -74,7 +74,6 @@ public class MemberEditEndAction extends AbstractController {
 				
 				
 				
-				
 			}
 			else {
 				message = "회원정보 수정 실패!!";
