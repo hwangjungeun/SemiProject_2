@@ -96,7 +96,6 @@ public class MemberDAO_PJW implements InterMemberDAO_PJW {
 					 "    registerday, "+
 					 "    point, "+
 					 "    usepoint, "+
-					 "    coupon, "+
 					 "    pwdchangegap, "+
 					 "    nvl(lastlogingap, trunc(months_between(sysdate, registerday))) AS lastlogingap "+
 					 "FROM "+
@@ -152,17 +151,8 @@ public class MemberDAO_PJW implements InterMemberDAO_PJW {
 					 "        WHERE "+
 					 "                fk_userid = ? "+
 					 "            AND p_status = 1 "+
-					 "    )  p_u "+
-					 "    CROSS JOIN ( "+
-					 "        SELECT "+
-					 "            COUNT(c_number) AS coupon "+
-					 "        FROM "+
-					 "            tbl_coupon "+
-					 "        WHERE "+
-					 "                fk_userid = ? "+
-					 "            AND c_status = 0 "+
-					 "            AND c_idle = 0 "+
-					 "    )  c ";
+					 "    )  p_u ";
+					 
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, paraMap.get("userid"));
@@ -170,7 +160,7 @@ public class MemberDAO_PJW implements InterMemberDAO_PJW {
 			pstmt.setString(3, paraMap.get("userid"));
 			pstmt.setString(4, paraMap.get("userid"));
 			pstmt.setString(5, paraMap.get("userid"));
-			pstmt.setString(6, paraMap.get("userid"));
+			
 			
 			rs= pstmt.executeQuery();
 			
@@ -192,17 +182,16 @@ public class MemberDAO_PJW implements InterMemberDAO_PJW {
 	            member.setRegisterday(rs.getString(16));
 	            member.setPoint(rs.getInt(17));
 	            member.setUsepoint(rs.getInt(18));
-	            member.setCoupon(rs.getInt(19));
 	          
 	  
-	            if(rs.getInt(20) >= 3) {
+	            if(rs.getInt(19) >= 3) {
 	            	// 마지막으로 암호를 변경한 날짜가 현재시각으로 부터 3개월이 지났으면 true
 	                // 마지막으로 암호를 변경한 날짜가 현재시각으로 부터 3개월이 지나지 않았으면 false
 	            	
 	            	member.setRequirePwdChange(true);
 	            	// 로그인시 암호를 변경해라는 alert 를 띄우도록 할때 사용한다.
 	            }
-	            if (rs.getInt(21) >= 12) {
+	            if (rs.getInt(20) >= 12) {
 	            	// 마지막으로 로그인 한 날짜시간이 현재시각으로 부터 1년이 지났으면 휴면으로 지정
 	            	
 	            	member.setIdle(1);

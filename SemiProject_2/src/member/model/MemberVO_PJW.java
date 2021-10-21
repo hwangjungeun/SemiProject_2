@@ -19,7 +19,6 @@ public class MemberVO_PJW {
 	   private String bottomsize;		  // 하의 사이즈
 	   private int point;				  // 포인트
 	   private int usepoint;			  // 사용한 포인트
-	   private int coupon;				  // 쿠폰
 	   private String registerday;        // 가입일자 
 	   private String lastpwdchangedate;  // 마지막으로 암호를 변경한 날짜  
 	   private int status;                // 회원탈퇴유무   1: 사용가능(가입중) / 0:사용불능(탈퇴) 
@@ -180,14 +179,6 @@ public class MemberVO_PJW {
 		
 		public int getUsepoint() {
 			return usepoint;
-		}
-		
-		public void setCoupon(int coupon){
-			this.coupon = coupon;
-		}
-		
-		public int getCoupon() {
-			return coupon;
 		}
 		
 		public String getRegisterday() {

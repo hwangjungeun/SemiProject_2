@@ -87,7 +87,6 @@
 	
 	div#myinfo2{
 	border-left:none;
-	height: 112.3px;
 	}
 	
 	
@@ -264,16 +263,6 @@
             </div>
         </li>
         
-        
-        <li class="shopMain coupon 1">
-            <div class="box">
-                <a href="<%= ctxPath %>/mypage/couponlist.go?userid=${sessionScope.loginuser.userid}">
-                    <h3>Coupon</h3>
-                    <p>쿠폰 목록</p>
-                </a>
-            </div>
-        </li>
-        
         <li class="shopMain board">
             <div class="box">
                 <a href="#">
@@ -298,14 +287,7 @@
             <strong class="title">사용적립금</strong>
             <strong class="data"><span id="xans_myshop_bankbook_used_mileage">${sessionScope.loginuser.usepoint}원</span></strong>
         </li>
-        
-      	<li class="">
-	            <strong class="title">쿠폰</strong>
-	            <strong class="data"><span id="xans_myshop_bankbook_coupon_cnt">${sessionScope.loginuser.coupon}</span><span>개</span></strong>
-	            <a href="<%= ctxPath %>/mypage/couponlist.go?userid=${sessionScope.loginuser.userid}" class="btnNormal">조회</a>
-	        </li>
-        </ul>
-        
+            
         </div>
        <div id = "myinfo2" class="xans-element- xans-myshop xans-myshop-asyncbankbook ec-base-box gHalf">
         <ul>
