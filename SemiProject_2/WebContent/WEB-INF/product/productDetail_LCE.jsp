@@ -157,7 +157,7 @@
 						alert(json.message);
 						
 						if(json.check == "1"){
-							location.href="/SemiProject/order/basket.go";
+							location.href="/SemiProject_1/order/basket.go";
 						}
 						else{
 							javascript:history.go(0);

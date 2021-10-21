@@ -21,24 +21,34 @@ public class BasketAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-//		super.getBasketCnt(request);// 다른 페이지들도 다 넣어야지 장바구니 갯수 볼 수 있음 !!
+		super.getBasketCnt(request);// 다른 페이지들도 다 넣어야지 장바구니 갯수 볼 수 있음 !!
+		
 		
 		String method = request.getMethod(); // "GET" 또는 "POST"
 		
 		System.out.println("방식: " + method);
+		String userid = "";
 		
 		// 로그인한 회원정보(아이디) 받아오기
-		//HttpSession session = request.getSession();
-		//MemberVO_PJW loginuserid = (MemberVO_PJW) session.getAttribute("loginuser");
-		//String userid = loginuserid.getUserid();
-		String userid = "eomjh";
-		//String loginuserid = "leess";  //테스트용 kimmk 0개 leess 6개
+		HttpSession session = request.getSession();
+		MemberVO_PJW loginuserid = (MemberVO_PJW) session.getAttribute("loginuser");
+
+		if( loginuserid != null) {
+			userid = loginuserid.getUserid();
+			request.setAttribute("loginuserid", userid);
+			//String userid = "eomjh";
+			//String loginuserid = "leess";  //테스트용 kimmk 0개 leess 6개
+		}
+		else {
+			userid = "";
+		}
+		
+		System.out.println("userid : " + userid );
 		
 		InterProductDAO_LCE pdao = new ProductDAO_LCE();
 
 		if("POST".equalsIgnoreCase(method)) {  // POST: 위시리스트에서 온 경우 => insert & delete 
 		
-
 			//System.out.println("확인용 loginuserid => " + loginuserid);
 
 			String opseq = request.getParameter("opseq"); //옵션 번호 받아옴 
@@ -86,12 +96,18 @@ public class BasketAction extends AbstractController {
 		//회원아이디로 장바구니에서 상품들 조회해오기 
 		List<CartVO_LCE> cartList = pdao.selectBasket(userid);
 		
+		//회원의 가용적립금 알아오기 
+		int usablePoint = pdao.getusablePoint(userid);
+		
+		
+		System.out.println("확인용 usablePoint => " + usablePoint );
 		/* 확인용 => 넘어옴 
 		if(cartList.size() != 0) {
 			System.out.println("잘넘어옴 ");
 		}
 		*/
 		request.setAttribute("cartList", cartList);
+		request.setAttribute("usablePoint", usablePoint);
 		//request.setAttribute("loginuserid", loginuserid); 굳이?
 		
 		//super.setRedirect(false);

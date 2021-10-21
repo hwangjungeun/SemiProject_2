@@ -5,10 +5,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
 import common.controller.AbstractController;
+import member.model.MemberVO_PJW;
 import product.model.InterProductDAO_LCE;
 import product.model.ProductDAO_LCE;
 
@@ -20,10 +22,10 @@ public class productDetailInsertAction extends AbstractController {
 		
 		//super.goBackURL(request);
 
-		boolean bool = checkLogin(request);
-				
+		boolean bool = super.checkLogin(request);
+		System.out.println("bool =>" + bool);
 		
-		if(!bool) {
+		if(!bool) {// 로그인을 안했을때 false => true 
 			
 			request.setAttribute("message","로그인 후 이용하실 수 있습니다");
 			request.setAttribute("loc","javascript:history.back()"); 
@@ -37,11 +39,15 @@ public class productDetailInsertAction extends AbstractController {
 		else {
 		//1-2 로그인을 한 상태 장바구니 테이블에 존재하면 update 아니면 insert
 		
+			HttpSession session = request.getSession();
+			MemberVO_PJW loginuser = (MemberVO_PJW)session.getAttribute("loginuser");
+			String loginuserid = loginuser.getUserid();
+			
 			JSONObject jsonObj = new JSONObject(); // json으로 결과값 넘겨줄 것
 			
 			
 			String method = request.getMethod(); // "GET" 또는 "POST"
-			String loginuserid = "leess";  //테스트용 
+			
 			
 			if("POST".equalsIgnoreCase(method)) {  // POST: 상품상세에서 특정제품의 옵션번호 opseq(무조건 배열 형식)를 확인 후 insert 또는 update		
 	
