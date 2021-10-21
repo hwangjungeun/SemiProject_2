@@ -84,7 +84,7 @@ public class BoardDAO implements InterBoardDAO {
     
   // QNA 게시판 글 목록 보여주기
  	@Override
- 	public List<BoardVO> selectPagingboard() throws SQLException {
+ 	public List<BoardVO> selectPagingboard(String keyword, String type) throws SQLException {
  		
  		List<BoardVO> boardList = new ArrayList<>();
  	      
@@ -94,6 +94,9 @@ public class BoardDAO implements InterBoardDAO {
  	         String sql = " select board_num, board_id, board_subject, board_content, board_count, board_date "
  	        		 	+ " from tbl_qna "; 
  	         
+	 	        if(keyword != null && keyword != "") {
+	            	sql = sql + "where " + type + " like '%"+ keyword +"%'";
+	            }
  	            
  	            pstmt = conn.prepareStatement(sql);
  
