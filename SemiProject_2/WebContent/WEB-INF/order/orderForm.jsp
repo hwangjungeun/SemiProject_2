@@ -578,27 +578,35 @@
 	//	console.log("확인용 dc_money : " + dc_money);
 	//	console.log("확인용 typeof(dc_money) : " + typeof(dc_money)); // number
 		
-		$("input[name=pointUsed]").val(dc_money); // 할인받았더라면 pointUsed에 (가공하지않은)할인액을 넣어줌. 안넣어주면 기본 value값은 0이다. -> 가격이 2,200이 아니라 2200이다.
-	
+		$("input[name=pointUsed]").val(dc_money); // 할인받았더라면 pointUsed에 (돈단위처럼 보이게 가공하지않은)할인액을 넣어줌. 안넣어주면 기본 value값은 0이다. -> 가격이 2,200이 아니라 2200이다.
+												  // 폼에 담아서 orderEnd.go에 넘기는 용도이다.
+												  
 		/////////////////////////////////////////////////////////////
-		var dc_money = parseInt(dc_money).toLocaleString('en');
-	//	console.log("확인용 dc_money : " + dc_money);
-		
-		$("strong#pointDiscount").text(dc_money);
-		
-		/////////////////////////////////////////////////////////////
-		// 총가격 계산하기
+		// 총가격(배송비포함) 계산하기
 		var totalPrice = $("input#totalPrice").val();
 		var deliveryFee = $("input#deliveryFee").val();
+	/*	
+		console.log("확인용 totalPrice => " + totalPrice);
+		console.log("확인용 typeof(totalPrice) => " + typeof(totalPrice)); // string
+		console.log("확인용 deliveryFee => " + deliveryFee);
+		console.log("확인용 typeof(deliveryFee) => " + typeof(deliveryFee)); // string
+		console.log("확인용 dc_money : " + dc_money);
+		console.log("확인용 typeof(dc_money) => " + typeof(dc_money)); // number
+	*/	
+		var realTotalPrice = parseInt(totalPrice)+parseInt(deliveryFee)-dc_money;
+	/*
+		console.log("확인용 realTotalPrice => " + realTotalPrice);
+		console.log("확인용 typeof(realTotalPrice) => " + typeof(realTotalPrice)); // number
+	*/	
+		realTotalPrice = realTotalPrice.toLocaleString('en');
+	//	console.log("확인용 realTotalPrice : " + realTotalPrice); // 74,016
 		
-		var realTotalPrice = parseInt(totalPrice)+parseInt(deliveryFee)-parseInt(dc_money);
-	
-		realTotalPrice = parseInt(realTotalPrice).toLocaleString('en');
-	
-		///////////////////////////////////////////////
-	
-		dc_money = dc_money.toLocaleString('en'); // 자바스크립트에서 숫자 3자리마다 콤마 찍어주기 (자바스크립트에서 fmt이 제대로 작동안함.)
-
+		var dc_money = dc_money.toLocaleString('en'); // 자바스크립트에서 숫자 3자리마다 콤마 찍어주기 (자바스크립트에서 fmt이 제대로 작동안함.)
+	//	console.log("확인용 dc_money : " + dc_money); // 1,484
+		
+		/////////////////////////////////////////////////////////////
+		// 뷰단에 보여주기
+		$("strong#pointDiscount").text(dc_money);
 		$("span#pointDiscount1").text(dc_money);
 		$("span#realTotalPrice").text(realTotalPrice);
 		

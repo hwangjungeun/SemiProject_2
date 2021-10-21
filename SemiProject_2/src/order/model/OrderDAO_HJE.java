@@ -77,7 +77,7 @@ public class OrderDAO_HJE implements InterOrderDAO_HJE {
 					"    select rownum as rno, fk_odrcode, pimage, pname ,totalquantity, odrtotalprice, odrdate, rank, (select count(*) from tbl_orderdetail where fk_odrcode = A.fk_odrcode  group by fk_odrcode) as totalproduct " + 
 					"    from \r\n" + 
 					"    (  \r\n" + 
-					"        select fk_odrcode, pimage, pname, RANK() OVER (PARTITION BY fk_odrcode ORDER BY pseq) RANK  " + 
+					"        select fk_odrcode, pimage, pname, RANK() OVER (PARTITION BY fk_odrcode ORDER BY pseq, fk_opseq) RANK  " + 
 					"        from tbl_product P join tbl_orderdetail D \r\n" + 
 					"        on p.pseq = D.fk_pseq \r\n" + 
 					"    )A JOIN tbl_order O \r\n" + 

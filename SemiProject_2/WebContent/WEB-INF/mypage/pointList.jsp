@@ -150,7 +150,7 @@
 		$.ajax ({
 			url: "<%= ctxPath%>/mypage/showPointUsedList.go",
 // 			type: "POST",
-		    data:{"userid":"${sessionScope.userid}"},
+		    data:{"userid":"${sessionScope.loginuser.userid}"},
 			dataType:"JSON",
 			success:function(json) {
 				

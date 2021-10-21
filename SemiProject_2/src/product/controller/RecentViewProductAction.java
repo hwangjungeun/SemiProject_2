@@ -15,6 +15,8 @@ public class RecentViewProductAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		super.getBasketCnt(request);
+		
 		// 최근본상품을 보기 위한 전제조건은 먼저 로그인을 해야 하는 것이다.
 		if( super.checkLogin(request) ) {
 			// 로그인을 했으면

@@ -19,15 +19,9 @@ public class OrderListAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		/*
-		String method = request.getMethod();
+		super.getBasketCnt(request);
 		
-		if("GET".equalsIgnoreCase(method)) {
-			super.setRedirect(false);
-			super.setViewPage("/WEB-INF/member/memberRegister.jsp");
-		}
-		else {  */
-		
+		if( super.checkLogin(request) ) {	
 
 			HttpSession session = request.getSession();
 			
@@ -148,19 +142,27 @@ public class OrderListAction extends AbstractController {
 			
 			// 총 주문 개수 구하기 시작 //
 			int allorder = odao.getCountAllOrder(paraMap);
-			System.out.println(allorder);
 			request.setAttribute("allorder", allorder);
 			
 			// 총 취소주문 개수 구하기 시작 //
 			int cancelorder = odao.getCountCancelOrder(paraMap);
-			System.out.println(cancelorder);
 			request.setAttribute("cancelorder", cancelorder);
 			
-//		}
-
-		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/mypage/orderList_HJE.jsp");
-		
+			super.setRedirect(false);
+			super.setViewPage("/WEB-INF/mypage/orderList_HJE.jsp");
+		}
+		else {
+			
+			String message = "주문조회를 위해서 로그인 먼저 해주세요 ! ";
+			String loc = request.getContextPath()+"/login/logintry.go";
+			 
+			request.setAttribute("message", message);
+			request.setAttribute("loc", loc);
+			     
+			super.setRedirect(false);
+			super.setViewPage("/WEB-INF/msg.jsp");
+			
+		}
 	}
 
 }

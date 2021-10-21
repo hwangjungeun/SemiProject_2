@@ -151,7 +151,7 @@
 	  }
 	 
 		if ($("input:checkbox[id=saveid]").prop("checked")) {
-			alert("아이디저장 체크를하셨네요.");
+			/* alert("아이디저장 체크를하셨네요."); */
 
 			localStorage.setItem('saveid', $("input#loginUserid").val());
 			//  로컬스토리지에 저장한다.

@@ -16,22 +16,10 @@ public class PointListAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		/*
-		String method= request.getMethod(); 
-				
-		if("post".equalsIgnoreCase(method)) {
-			String message = "비정상적인 경로로 들어왔습니다.";
-			String loc ="javascript:history.back()";
-			
-			request.setAttribute("message", message);
-			request.setAttribute("loc", loc);
-			
-			super.setRedirect(false);
-			super.setViewPage("/WEB-INF/msg.jsp");
-			
-			return; // execute(HttpServletRequest request, HttpServletResponse response) 메소드 종료함
-		}
-		else {	*/
+		
+		super.getBasketCnt(request);
+		
+		if( super.checkLogin(request) ) {	
 			
 			HttpSession session = request.getSession();
 			
@@ -145,11 +133,19 @@ public class PointListAction extends AbstractController {
 			super.setRedirect(false);
 			super.setViewPage("/WEB-INF/mypage/pointList.jsp");
 		}
-		
-		
+		else {
 			
-				
-//	}
+			String message = "포인트조회를 위해서 로그인 먼저 해주세요 ! ";
+			String loc = request.getContextPath()+"/login/logintry.go";
+			
+			request.setAttribute("message", message);
+			request.setAttribute("loc", loc);
+			
+			super.setRedirect(false);
+			super.setViewPage("/WEB-INF/msg.jsp");
+			
+		}
+	}
 
 }
 

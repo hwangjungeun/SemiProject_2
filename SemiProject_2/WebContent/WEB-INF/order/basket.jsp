@@ -191,6 +191,7 @@
 		
 	//Function Declaration
 	
+	
 	// 전체품목 체크/해제
 	function func_allcheck(bool){ 
 		
@@ -198,7 +199,7 @@
 		$("input:checkbox[id=basketchk]").prop("checked",bool);
 	
 	}// end of func_allcheck(bool){}-------------------------------------
- 
+ 	
 	
 	// 하나의 품목 체크/해제 했을 때
 	function func_check(bool){ 
@@ -235,7 +236,8 @@
 			var cartseqArr = new Array();
 		
 			$("input:checkbox[id=basketchk]:checked").each(function(){
-				cartseqArr.push($(this).val());
+				var value= $(this).val(); 
+				cartseqArr.push(value);
 			});
 			
 			var cartseq = cartseqArr.join();
@@ -266,7 +268,8 @@
 		var cartseqArr = new Array();
 
 		$("input:checkbox[id=basketchk]").each(function(){
-			cartseqArr.push($(this).val());
+			var value= $(this).val(); 
+			cartseqArr.push(value);
 		});
 		
 		var cartseq = cartseqArr.join();
@@ -351,7 +354,8 @@
 				var cartseqArr = new Array();
 	
 				$("input:checkbox[id=basketchk]:checked").each(function(){
-					cartseqArr.push($(this).val());
+					var value= $(this).val(); 
+					cartseqArr.push(value);
 				});
 				
 				var cartseq = cartseqArr.join();
@@ -388,21 +392,27 @@
 		var bool = confirm("전체상품을 삭제하시겠습니까?");
 		
 		if(bool){
-			
+		
 			var cartseqArr = new Array();
-			
+		
 			$("input:checkbox[id=basketchk]").each(function(){
-				cartseqArr.push($(this).val());
+				var value= $(this).val(); 
+				cartseqArr.push(value);
 			});
 			
 			var cartseq = cartseqArr.join();
 			
-			console.log("확인용 =>" +cartset);
+			console.log("확인용 =>" +cartseq);
 			
 			$("input:hidden[name=cartseq]").val(cartseq);
 			
-			//cartseq = $("input:hidden[name=cartseq]").val();
+			//var a = $("input:hidden[name=cartseq]").val();
 			
+			//console.log("a=>"+ a);
+			
+			cartseq = $("input:hidden[name=cartseq]").val();
+			
+			//console.log(cartseq);
 			
 			$.ajax({
 				url:"/SemiProject_1/order/deleteThis.go",
@@ -415,6 +425,7 @@
 		            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
 		         }
 			});
+			
 		}
 		else{
 			alert("전체상품 삭제를 취소하셨습니다.");
@@ -448,7 +459,7 @@
 				<tbody>
 					<tr>
 						<td rowspan="2" ><h3>혜택정보</h3></td>
-						<td id="second" colspan="9" style="text-align:left">${sessionScope.loginuser.name}님의 가용적립금은 sessionScope.loginuser.point 입니다.</td>
+						<td id="second" colspan="9" style="text-align:left">${sessionScope.loginuser.name}님의 가용적립금은 ${requestScope.usablePoint}입니다.</td>
 					</tr>
 				</tbody>
 			</table>
@@ -468,7 +479,6 @@
 	
 	<!-- 장바구니 테이블 시작: 데이터 받아와서 보여주는 테이블/form submit할때 name다시 확인/-->
 	<c:if test="${sessionScope.basketCnt != 0 }">
-		<form name="cartFrm">
 			<div class="table-responsive">
 				<table class="table">
 					<colgroup>
@@ -508,7 +518,7 @@
 						<c:forEach var="cvo" items="${requestScope.cartList}" varStatus="status">
 							<tr>
 								<td>
-									<input type="checkbox" value="${cvo.cartseq}" id="basketchk" onclick="func_check(this.checked)">
+									<input type="checkbox" value="${cvo.cartseq}" id="basketchk" onclick="func_check(this.checked)" >
 								</td>
 								<td style="border-right: none;">
 									<a href="<%= ctxPath%>/product/productDetail.go?pseq=${cvo.fk_pseq.pseq}">
@@ -590,7 +600,7 @@
 					<button class="btn btn-outline-secondary" id="btnchooseDel" style="margin-right: 5px;" onclick="goDelSelect()"><i class="fas fa-times"></i>&nbsp;삭제하기</button>		
 				</span>
 				<span style="float:right;">
-					<button class="btn btn-outline-secondary" id="btnAllDel"  style="margin-right: 3px;" onclick="goDelAll()">장바구니비우기</button>		
+					<button class="btn btn-outline-secondary" id="btnAllDel"  style="margin-right: 3px;" onclick="goDelAll()" >장바구니비우기</button>		
 				</span>
 			</div>
 			<!-- 삭제 버튼영역 끝 -->
@@ -625,9 +635,9 @@
 			</div>
 			<!-- 결제버튼영역 끝 -->
 			
+		<form name="cartFrm">
 			<input type="hidden" name="cartseq" value="">						
 			<input type="hidden" name="userid" value="${requestScope.loginuserid}">
-			
 		</form>
 	</c:if>
 	
