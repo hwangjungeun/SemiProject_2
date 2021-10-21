@@ -56,17 +56,26 @@ public class NoticeListAction extends AbstractController {
 		     if("checknull".equals(checknull)) {
 		    	 String notice_id = mtrequest.getParameter("notice_id");
 				 String notice_subject = mtrequest.getParameter("notice_subject");
+
+				 // !!!! 크로스 사이트 스크립트 공격에 대응하는 안전한 코드(시큐어코드) 작성하기 !!!! // 
+
 				 String notice_content = mtrequest.getParameter("notice_content");
+				 notice_content = notice_content.replaceAll("<", "&lt;");
+				 notice_content = notice_content.replaceAll(">", "&gt;");
+				 
+				// 입력한 내용에서 엔터는 <br>로 변환시키기
+				 notice_content = notice_content.replaceAll("\r\n", "<br>");
+				 
 				 String nimage = mtrequest.getFilesystemName("nimage");
 			
-				ndao.register(notice_id,notice_subject,notice_content,nimage);
+				 ndao.register(notice_id,notice_subject,notice_content,nimage);
 				
-				List<NoticeVO> noticeList =  ndao.selectPagingnotice();
+				 List<NoticeVO> noticeList =  ndao.selectPagingnotice();
 				
-				/////////////////////////////////////////////////////
+				 /////////////////////////////////////////////////////
 				
-				request.setAttribute("noticeList", noticeList);
-				super.setViewPage("/WEB-INF/board/noticeList.jsp");	
+				 request.setAttribute("noticeList", noticeList);
+				 super.setViewPage("/WEB-INF/board/noticeList.jsp");	
 		     }
 			 
 			
