@@ -11,10 +11,9 @@ public class BoardVO {
 //	private String board_file;		// 첨부파일 이름
 	private int board_count;		// 글 조회수
 	private Date board_date;		// 글 작성일
-	
+
 	////////////////////////////////////////////////////////////////////////////////////////
 	
-	public BoardVO() {}
 	   
 	   public BoardVO(String board_id, String board_subject, String board_content) {
 	     
@@ -24,7 +23,13 @@ public class BoardVO {
 	//	   this.board_file = board_file;
 
 	   }
+	   
+	   
 	
+	public BoardVO() {}
+
+
+
 	public int getBoard_num() {
 		return board_num;
 	}
@@ -56,7 +61,8 @@ public class BoardVO {
 	public void setBoard_content(String board_content) {
 		this.board_content = board_content;
 	}
-/*	
+	
+	/*	
 	public String getBoard_file() {
 		return board_file;
 	}
@@ -80,7 +86,6 @@ public class BoardVO {
 	public void setBoard_date(Date board_date) {
 		this.board_date = board_date;
 	}
-
 
 	
 }
