@@ -16,6 +16,8 @@ public class MemberRegisterAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		super.getBasketCnt(request);
+		
 		String method = request.getMethod();
 		
 		if("GET".equalsIgnoreCase(method)) {
