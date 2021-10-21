@@ -9,7 +9,7 @@ public class LogintryAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+		super.getBasketCnt(request);
 		super.setViewPage("/WEB-INF/login/login.jsp");
 
 	}

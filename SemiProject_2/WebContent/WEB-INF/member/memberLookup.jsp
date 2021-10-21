@@ -281,7 +281,8 @@
 		<li class=" ">
             <span class="title">가용적립금</span>
             &nbsp;
-            <a href="<%= ctxPath %>/mypage/pointList.go?userid=${sessionScope.loginuser.userid}" class="btnNormal">조회</a>
+            <strong class="data"><span id="xans_myshop_bankbook_total_mileage">${sessionScope.loginuser.point}원</span></strong>
+            
         
         <li class="">
             <strong class="title">사용적립금</strong>
@@ -294,15 +295,8 @@
         	<li class="">
             <strong class="title">총적립금</strong>
             <strong class="data"><span id="xans_myshop_bankbook_total_mileage">${sessionScope.loginuser.point}원</span></strong>
+        	<a href="<%= ctxPath %>/mypage/pointList.go?userid=${sessionScope.loginuser.userid}" class="btnNormal">조회</a>
         	</li>
-        
-        
-	        <li>
-	            <strong class="title">총주문</strong>
-	            <strong class="data"><span id="xans_myshop_bankbook_order_price">0원</span>(<span id="xans_myshop_bankbook_order_count">0</span>회)</strong>
-
-	           <a href="#" class="btnNormal">조회</a>
-	        </li>
 	        
         </ul>
         </div>

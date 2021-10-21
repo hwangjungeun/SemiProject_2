@@ -13,6 +13,7 @@ public class MemberEditAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		super.getBasketCnt(request);
 		
 		// 내정보(회원정보)를 수정하기 위한 전제조건은 먼저 로그인을 해야 하는 것이다.
 		if(super.checkLogin(request)) {
