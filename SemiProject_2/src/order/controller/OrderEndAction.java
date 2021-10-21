@@ -36,6 +36,8 @@ public class OrderEndAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		super.getBasketCnt(request);
+		
 		// orderForm으로부터 post방식으로 가져온거(form태그의 name)
 		
 		// destination,receiverName,postcode,address,detailAddress,extraAddress,hp1,hp2,hp3,email,deliveryMsg 아니고,

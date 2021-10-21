@@ -15,6 +15,8 @@ public class QnaDeleteEndAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		super.getBasketCnt(request);
+		
 		String method = request.getMethod();
 	 	
 		if("POST".equalsIgnoreCase(method)) { // POST로 들어왔다는 것은 팝업창에서 삭제하겠다고 동의한 것이다.

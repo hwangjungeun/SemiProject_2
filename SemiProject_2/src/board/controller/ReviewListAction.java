@@ -18,7 +18,8 @@ public class ReviewListAction extends AbstractController {
    public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 	   
-
+	   	 super.getBasketCnt(request);
+	   
 	     InterReviewDAO rdao = new ReviewDAO();
 		
 		 String rwriter = request.getParameter("rwriter");

@@ -12,7 +12,7 @@ public class ReviewWriteAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-
+		  super.getBasketCnt(request);
     	  super.setViewPage("/WEB-INF/board/reviewWrite.jsp");			
 	      
 	}

@@ -201,7 +201,8 @@ $(document).ready(function(){
 				</tr>
 				<tr>
 					<td>
-						<img style="height:1000px; width:800px;" src="<%= ctxPath%>/images/${requestScope.nvo.nimage}"/>	
+						<br>
+						<img style="height:900px; width:800px;" src="<%= ctxPath%>/images/${requestScope.nvo.nimage}"/>	
 					</td>
 				</tr>
                 <tr id="btt">

@@ -18,6 +18,8 @@ public class OrderFormAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		super.getBasketCnt(request);
+		
 		// 주문을 하기 위한 전제조건은 먼저 로그인을 해야 하는 것이다.
 		if( super.checkLogin(request) ) {
 			// 로그인을 했으면

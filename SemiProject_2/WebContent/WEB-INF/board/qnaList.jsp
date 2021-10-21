@@ -124,6 +124,12 @@ span.button {
     padding: 5px;
     margin-right: 75px;
 }
+ul.pagination{
+    z-index: 3;
+    color: #fff;
+    background-color: #777;
+    border-color: #777;
+}
 
 </style>
 
@@ -260,8 +266,7 @@ span.button {
 		      <span class="button">	
 		         <a href="<%=ctxPath%>/board/qnaWrite.go">글작성</a> 
 		      </span>
-		   </p>
-		      
+		   </p>  
 	    </form>
 	      
 	    <nav class="my-5">

@@ -21,11 +21,12 @@ public class NoticeListAction extends AbstractController {
    @Override
    public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+	   	 super.getBasketCnt(request);
 	   
-	   InterNoticeDAO ndao = new NoticeDAO();
-	String checknull ="";
+	   	 InterNoticeDAO ndao = new NoticeDAO();
+	   	 String checknull ="";
 		   
-	   HttpSession session = request.getSession();
+	   	 HttpSession session = request.getSession();
 	   
 	     MultipartRequest mtrequest = null;
          
@@ -34,11 +35,12 @@ public class NoticeListAction extends AbstractController {
          
          try {
 		          mtrequest = new MultipartRequest(request,    // 리퀘스트 객체
-		          uploadFileDir, // 파일이 업로드될 경로명
+		          uploadFileDir, 	// 파일이 업로드될 경로명
 		          100*1080*1080,    // 10MB로 제한한다. (단위는 bite로 써야함)
-		          "UTF-8",       // 인코딩 타입
+		          "UTF-8",       	// 인코딩 타입
 		          new DefaultFileRenamePolicy());
 		          checknull = mtrequest.getParameter("checknull");
+		          
          } catch(IOException e) {
          
         	 
