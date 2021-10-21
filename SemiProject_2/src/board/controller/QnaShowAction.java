@@ -14,6 +14,8 @@ public class QnaShowAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		 super.getBasketCnt(request);
+		
 		 String userid = "";
 		   
 	   try {

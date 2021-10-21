@@ -14,6 +14,8 @@ public class QnaListAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+			super.getBasketCnt(request);
+		
 			InterBoardDAO bdao = new BoardDAO();
 			
 			String board_id = request.getParameter("board_id");

@@ -12,6 +12,7 @@ public class ReviewEditAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		  super.getBasketCnt(request);
 		
 		  String method = request.getMethod();
 		

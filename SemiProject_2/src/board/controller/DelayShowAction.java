@@ -10,6 +10,8 @@ public class DelayShowAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		super.getBasketCnt(request);
+		
 		String method = request.getMethod();
 		
 		//	super.setRedirect(false);

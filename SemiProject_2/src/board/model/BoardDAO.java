@@ -82,16 +82,16 @@ public class BoardDAO implements InterBoardDAO {
     } // end getSeq()---------------------------------------------
     
     
-  // QNA 게시판 글 목록 보여주기
+    // QNA 게시판 글 목록 보여주기
  	@Override
  	public List<BoardVO> selectPagingboard(String keyword, String type) throws SQLException {
  		
  		List<BoardVO> boardList = new ArrayList<>();
  	      
  	      try {
- 	         conn = ds.getConnection();
+ 	    	  	conn = ds.getConnection();
  	         
- 	         String sql = " select board_num, board_id, board_subject, board_content, board_count, board_date "
+ 	         	String sql = " select board_num, board_id, board_subject, board_content, board_count, board_date "
  	        		 	+ " from tbl_qna "; 
  	         
 	 	        if(keyword != null && keyword != "") {
