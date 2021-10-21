@@ -77,29 +77,100 @@ public class MemberDAO_PJW implements InterMemberDAO_PJW {
 		try {
 			conn= ds.getConnection();
 			
-			String sql = " select userid, name, email, mobile, postcode, address, detailaddress, extraaddress, "+
-					" birthyyyy, birthmm, birthdd, height, weight, topsize, bottomsize, registerday, pwdchangegap, "+
-					" NVL(lastlogingap, trunc( months_between(sysdate,registerday) )) AS lastlogingap "+
-					" from "+
-					" ( "+
-					" select userid, name , email, mobile, postcode, address, detailaddress, extraaddress, "+
-					" substr(birthday,1,4) as birthyyyy, substr(birthday,6,2) as birthmm, substr(birthday,9) as birthdd "+
-					" , height, weight, topsize, bottomsize,  registerday, "+
-					" trunc(months_between(sysdate, lastpwdchangedate)) as pwdchangegap "+
-					" from tbl_member "+
-					" where status = 1 and userid = ? and pwd = ? "+
-					" ) M "+
-					" CROSS JOIN "+
-					" ("+
-					" select trunc(months_between(sysdate, max(logindate))) AS lastlogingap "+
-					" from tbl_loginhistory "+
-					" where fk_userid = ? "+
-					" ) H ";
+			 String sql = "SELECT "+
+					 "    userid, "+
+					 "    name, "+
+					 "    email, "+
+					 "    mobile, "+
+					 "    postcode, "+
+					 "    address, "+
+					 "    detailaddress, "+
+					 "    extraaddress, "+
+					 "    birthyyyy, "+
+					 "    birthmm, "+
+					 "    birthdd, "+
+					 "    height, "+
+					 "    weight, "+
+					 "    topsize, "+
+					 "    bottomsize, "+
+					 "    registerday, "+
+					 "    point, "+
+					 "    usepoint, "+
+					 "    coupon, "+
+					 "    pwdchangegap, "+
+					 "    nvl(lastlogingap, trunc(months_between(sysdate, registerday))) AS lastlogingap "+
+					 "FROM "+
+					 "         ( "+
+					 "        SELECT "+
+					 "            userid, "+
+					 "            name, "+
+					 "            email, "+
+					 "            mobile, "+
+					 "            postcode, "+
+					 "            address, "+
+					 "            detailaddress, "+
+					 "            extraaddress, "+
+					 "            substr(birthday, 1, 4)                                    AS birthyyyy, "+
+					 "            substr(birthday, 6, 2)                                    AS birthmm, "+
+					 "            substr(birthday, 9)                                       AS birthdd, "+
+					 "            height, "+
+					 "            weight, "+
+					 "            topsize, "+
+					 "            bottomsize, "+
+					 "            registerday, "+
+					 "            trunc(months_between(sysdate, lastpwdchangedate))         AS pwdchangegap "+
+					 "        FROM "+
+					 "            tbl_member "+
+					 "        WHERE "+
+					 "                status = 1 "+
+					 "            AND userid = ? "+
+					 "            AND pwd = ? "+
+					 "    ) m "+
+					 "    CROSS JOIN ( "+
+					 "        SELECT "+
+					 "            trunc(months_between(sysdate, MAX(logindate))) AS lastlogingap "+
+					 "        FROM "+
+					 "            tbl_loginhistory "+
+					 "        WHERE "+
+					 "            fk_userid = ? "+
+					 "    )  h "+
+					 "    CROSS JOIN ( "+
+					 "        SELECT "+
+					 "            SUM(point) AS point "+
+					 "        FROM "+
+					 "            tbl_point "+
+					 "        WHERE "+
+					 "                fk_userid = ? "+
+					 "            AND p_status = 0 "+
+					 "            AND p_idle = 0 "+
+					 "    )  p "+
+					 "    CROSS JOIN ( "+
+					 "        SELECT "+
+					 "            SUM(point) AS usepoint "+
+					 "        FROM "+
+					 "            tbl_point "+
+					 "        WHERE "+
+					 "                fk_userid = ? "+
+					 "            AND p_status = 1 "+
+					 "    )  p_u "+
+					 "    CROSS JOIN ( "+
+					 "        SELECT "+
+					 "            COUNT(c_number) AS coupon "+
+					 "        FROM "+
+					 "            tbl_coupon "+
+					 "        WHERE "+
+					 "                fk_userid = ? "+
+					 "            AND c_status = 0 "+
+					 "            AND c_idle = 0 "+
+					 "    )  c ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, paraMap.get("userid"));
 			pstmt.setString(2, Sha256.encrypt(paraMap.get("pwd")));
 			pstmt.setString(3, paraMap.get("userid"));
+			pstmt.setString(4, paraMap.get("userid"));
+			pstmt.setString(5, paraMap.get("userid"));
+			pstmt.setString(6, paraMap.get("userid"));
 			
 			rs= pstmt.executeQuery();
 			
@@ -114,20 +185,24 @@ public class MemberDAO_PJW implements InterMemberDAO_PJW {
 	            member.setDetailaddress(rs.getString(7));
 	            member.setExtraaddress(rs.getString(8));
 	            member.setBirthday(rs.getString(9) + rs.getString(10) + rs.getString(11));
-	            member.setHeight(rs.getInt(12));
-	            member.setWeight(rs.getInt(13));
+	            member.setHeight(rs.getString(12));
+	            member.setWeight(rs.getString(13));
 	            member.setTopsize(rs.getString(14));
 	            member.setBottomsize(rs.getString(15));
 	            member.setRegisterday(rs.getString(16));
-	            
-	            if(rs.getInt(17) >= 3) {
+	            member.setPoint(rs.getInt(17));
+	            member.setUsepoint(rs.getInt(18));
+	            member.setCoupon(rs.getInt(19));
+	          
+	  
+	            if(rs.getInt(20) >= 3) {
 	            	// 마지막으로 암호를 변경한 날짜가 현재시각으로 부터 3개월이 지났으면 true
 	                // 마지막으로 암호를 변경한 날짜가 현재시각으로 부터 3개월이 지나지 않았으면 false
 	            	
 	            	member.setRequirePwdChange(true);
 	            	// 로그인시 암호를 변경해라는 alert 를 띄우도록 할때 사용한다.
 	            }
-	            if (rs.getInt(18) >= 12) {
+	            if (rs.getInt(21) >= 12) {
 	            	// 마지막으로 로그인 한 날짜시간이 현재시각으로 부터 1년이 지났으면 휴면으로 지정
 	            	
 	            	member.setIdle(1);
@@ -276,45 +351,91 @@ public class MemberDAO_PJW implements InterMemberDAO_PJW {
 		int n = 0;
 		
 		try {
-
+			
 			conn = ds.getConnection();
-
-			String sql = " update tbl_member set name = ? "
-					   + " 						,pwd = ? " 						
-					   + " 						,lastpwdchangedate = sysdate " 						
-					   + " 						,email = ? " 						
-					   + " 						,mobile = ? " 						
-					   + " 						,postcode = ? " 						
-					   + " 						,address = ? " 						
-					   + " 						,detailaddress = ? " 						
-					   + " 						,extraaddress = ? " 						
-					   + " where userid = ? ";
-
+			
+			
+			
+			String sql = " UPDATE tbl_member "+
+					" SET "+
+					"    pwd = ? , "+
+					"    name = ? , "+
+					"    email = ? , "+
+					"    mobile = ? , "+
+					"    postcode = ? , "+
+					"    address = ? , "+
+					"    detailaddress = ? , "+
+					"    extraaddress = ? , "+
+					"    height = ? , "+
+					"    weight = ? , "+
+					"    topsize = ? , "+
+					"    bottomsize = ? , "+
+					"    lastpwdchangedate = sysdate "+
+					" WHERE "+
+					"    userid = ? ";
+			
 			pstmt = conn.prepareStatement(sql);
-
-			// 암호를 SHA256 알고리즘으로 단방향 암호화 시킨다.
-			pstmt.setString(1, member.getName());
-			pstmt.setString(2, Sha256.encrypt(member.getPwd()));
+			
+			pstmt.setString(1, Sha256.encrypt(member.getPwd()));	// 암호를 SHA256 알고리즘으로 단방향 암호화 시킨다. 
+			pstmt.setString(2, member.getName());
 			pstmt.setString(3, aes.encrypt(member.getEmail()));
+			// 이메일을 AES256 알고리즘으로 양방향 암호화 시킨다.
 			pstmt.setString(4, aes.encrypt(member.getMobile()));
+			// 휴대폰번호를 AES256 알고리즘으로 양방향 암호화 시킨다.
 			pstmt.setString(5, member.getPostcode());
-			pstmt.setString(6, member.getAddress());
-			pstmt.setString(7, member.getDetailaddress());
-			pstmt.setString(8, member.getExtraaddress());
-			pstmt.setString(9, member.getUserid());
-
-			n = pstmt.executeUpdate();
-
+	        pstmt.setString(6, member.getAddress());
+	        pstmt.setString(7, member.getDetailaddress());
+	        pstmt.setString(8, member.getExtraaddress());
+	        pstmt.setString(9, member.getHeight());
+	        pstmt.setString(10, member.getWeight());
+	        pstmt.setString(11, member.getTopsize());
+	        pstmt.setString(12, member.getBottomsize());
+	        pstmt.setString(13, member.getUserid());
+	        
+	        n = pstmt.executeUpdate();
+			
 		} catch (GeneralSecurityException | UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} finally {
 			close();
-		}
-
+		} 
+		
 		return n;
 	} // end of public int updateMember(MemberVO member)
 
+	// EMAIL 중복검사 (tbl_member 테이블에서 email이 존재하면 true를 리턴해주고, email이 존재하지 않으면 false를 리턴한다)
+		@Override
+		public boolean emailDuplicateCheck(String email) throws SQLException {
+			
+			boolean isExists = false;
+			
+			try {
+				conn = ds.getConnection();
+				
+				String sql =" select email "
+						   + " from tbl_member "
+						   + " where email =? ";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, aes.encrypt(email));
+				// "seokj@gmail.com" ==> aes.encrypt("seokj@gmail.com") 해서 암호화되어 DB에 저장되어 있는 값과 비교
+				
+				rs = pstmt.executeQuery();
+				
+				isExists = rs.next();	// 행이 있으면(중복된 email) true,
+										// 행이 없으면(사용가능한 email) false
+						
+			} catch (UnsupportedEncodingException |GeneralSecurityException e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			
+			
+			return isExists;
+		}// end of public boolean emailDuplicateCheck(String email)
 
-
+		
+	
 
 }
