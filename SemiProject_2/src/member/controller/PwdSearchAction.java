@@ -16,7 +16,6 @@ public class PwdSearchAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		String method = request.getMethod();
 		// "GET" or "POST"
 		

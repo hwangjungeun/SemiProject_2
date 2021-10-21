@@ -10,7 +10,7 @@ public class LogoutAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+		super.getBasketCnt(request);
 		// 로그아웃 처리하기.
 		
 		

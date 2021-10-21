@@ -15,7 +15,7 @@ public class MemberEditEndAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+		super.getBasketCnt(request);
 		String method = request.getMethod();
 		
 		if("POST".equalsIgnoreCase(method)) {
@@ -48,6 +48,7 @@ public class MemberEditEndAction extends AbstractController {
 			
 			String message = "";
 			String loc = "javascript:history.back()";
+		
 			if(n == 1) {
 				
 				
@@ -72,16 +73,19 @@ public class MemberEditEndAction extends AbstractController {
 				message = "회원정보 수정 성공!!";
 				
 				
+				
 			}
 			else {
 				message = "회원정보 수정 실패!!";
+				
+				
+				
 			}
 		
 			request.setAttribute("message", message);
 			request.setAttribute("loc", loc);
 			
 			super.setViewPage("/WEB-INF/msg.jsp");
-			
 		}
 		else {
 			// ******* POST 방식으로 넘어온 것이 아니라면 ***** //

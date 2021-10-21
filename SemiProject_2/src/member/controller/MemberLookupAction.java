@@ -10,6 +10,7 @@ public class MemberLookupAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		super.getBasketCnt(request);
 		super.setViewPage("/WEB-INF/member/memberLookup.jsp");
 		
 		

@@ -16,6 +16,7 @@ public class LoginAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		super.getBasketCnt(request);
 		
 		String method = request.getMethod();
 		
@@ -41,7 +42,7 @@ public class LoginAction extends AbstractController {
 		// ==> 클라이언트의 IP 주소를 알아오는것 
 		
 		String clientip = request.getRemoteAddr();
-		// C:\NCS\workspace(jsp)\MyMVC\WebContent\JSP 파일을 실행시켰을 때 IP 주소가 제대로 출력되기위한 방법.txt 참조할 것
+		
 		
 		Map<String, String> paraMap = new HashMap<>();
 		paraMap.put("userid", userid);
