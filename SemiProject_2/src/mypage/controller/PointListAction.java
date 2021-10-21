@@ -17,6 +17,8 @@ public class PointListAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		super.getBasketCnt(request);
+		
 		if( super.checkLogin(request) ) {	
 			
 			HttpSession session = request.getSession();
