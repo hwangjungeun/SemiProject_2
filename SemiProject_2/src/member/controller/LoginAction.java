@@ -47,7 +47,6 @@ public class LoginAction extends AbstractController {
 		paraMap.put("userid", userid);
 		paraMap.put("pwd", pwd);
 		paraMap.put("clientip", clientip);
-		
 		InterMemberDAO_PJW mdao = new MemberDAO_PJW();
 		
 		MemberVO_PJW loginuser = mdao.selectOneMember(paraMap);
@@ -70,6 +69,7 @@ public class LoginAction extends AbstractController {
 			
 			// 로그인 성공시
 			System.out.println(">>> 확인용 로그인한 사용자명 :" + loginuser.getName());
+			System.out.println(">>> 확인용 로그인한 사용자의 쿠폰개수" + loginuser.getCoupon());
 			
 		
 			

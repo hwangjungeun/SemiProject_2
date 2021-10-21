@@ -100,7 +100,7 @@
 		var allsum = 50; // 베스트 조건갯수
 		
 		$.ajax({
-			url:"/SemiProject/product/bestPageJSON.go",
+			url:"/SemiProject_1/product/bestPageJSON.go",
 			data:{"cnt":cnt // 8
 				,"start":start},
 				//,"sortType":sortType},// 페이지시작 ,"allsum" : allsum} => 갯수 부족하므로 좀 더 채워지면 넣을 것 
@@ -123,9 +123,9 @@
 						html += "<div class='card-deck mb-5'>" +
 									"<div class='col-md-3 col-lg-3'>" +
 								    	"<div class='card mb-3' style='width:255px; border:0px; padding:0px;'>"+
-								    	 "<img src='/SemiProject/images/"+ item.pimage + "' class='card-img-top'  style='height:340px;'alt='...'>" +
+								    	 "<img src='/SemiProject_1/images/"+ item.pimage + "' class='card-img-top'  style='height:340px;'alt='...'>" +
 							   				"<div class='card-body'>" +
-							     				"<a class='stretched-link' href = '/SemiProject/product/productDetail.go?pseq="+item.pseq+"'></a>" +
+							     				"<a class='stretched-link' href = '/SemiProject_1/product/productDetail.go?pseq="+item.pseq+"'></a>" +
 							     				"<h5 class='card-title'>"+item.pname+"</h5>" +
 							     				"<p class='card-text'>"+price+"원</p>" +
 							  				"</div>" +

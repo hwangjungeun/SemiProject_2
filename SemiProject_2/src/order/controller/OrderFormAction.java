@@ -17,19 +17,19 @@ public class OrderFormAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		/*
+		
 		// 주문을 하기 위한 전제조건은 먼저 로그인을 해야 하는 것이다.
 		if( super.checkLogin(request) ) {
 			// 로그인을 했으면
-		*/	
-	//		String userid = request.getParameter("userid"); // 주소창에 넘어온 userid
+			
+			String userid = request.getParameter("userid"); // 주소창에 넘어온 userid
 
 			HttpSession session = request.getSession();
 			MemberVO_PJW loginuser = (MemberVO_PJW)session.getAttribute("loginuser");
-			String userid = loginuser.getUserid();
-		/*	if(loginuser.getUserid().equals(userid)) { // 로그인을 했으니 MemberVO는 null이 아님
+//			String userid = loginuser.getUserid();
+			if(loginuser.getUserid().equals(userid)) { // 로그인을 했으니 MemberVO는 null이 아님
 				// 로그인한 사용자가 자신의 주문을 하는 경우
-		*/	
+			
 				Map<String,String> map = null;
 				
 				
@@ -124,11 +124,11 @@ public class OrderFormAction extends AbstractController {
 			//	super.setRedirect(false);
 				super.setViewPage("/WEB-INF/order/orderForm.jsp");
 		
-/*			}
+			}
 			else {
 				// 로그인한 사용자가 다른 사용자의 주문을 하려고 시도하는 경우 
 	            String message = "다른 사용자의 주문을 하는건 불가합니다.!!";
-	            String loc = "javascript:history.back()";
+	            String loc = request.getContextPath()+"/index.go";
 	            
 	            request.setAttribute("message", message);
 	            request.setAttribute("loc", loc);
@@ -141,7 +141,7 @@ public class OrderFormAction extends AbstractController {
 		else {
 			// 로그인을 안 했으면
 			String message = "주문을 하기 위해서는 먼저 로그인을 하세요!!";
-			String loc = "javascript:history.back()";
+			String loc = request.getContextPath()+"/index.go";
 			 
 			request.setAttribute("message", message);
 			request.setAttribute("loc", loc);
@@ -149,7 +149,7 @@ public class OrderFormAction extends AbstractController {
 		//	super.setRedirect(false);
 			super.setViewPage("/WEB-INF/msg.jsp");
 		}
-*/
+
 				
 	}// end of public void execute(HttpServletRequest request, HttpServletResponse response)-----------------------------------------------------------
 
