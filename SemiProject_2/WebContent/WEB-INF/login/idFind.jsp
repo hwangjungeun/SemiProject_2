@@ -87,7 +87,7 @@ a.navbar-brand {
    
    <div class="my-3" id="div_findResult">
         <p class="text-center">
-           ID : <span style="color: black; font-size: 16pt; font-weight: bold;">회원님의 아이디는 ${requestScope.userid} 입니다.</span> 
+        <span style="color: black; font-size: 16pt; font-weight: bold;">회원님의 아이디는 ${requestScope.userid} 입니다.</span> 
       </p>
    </div>
    
