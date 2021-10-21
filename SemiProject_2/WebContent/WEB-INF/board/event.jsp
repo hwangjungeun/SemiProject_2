@@ -27,8 +27,7 @@
 #contents {
     position: relative;
     margin: 0 auto;
-<<<<<<< HEAD
-    min-height: 750px;
+    min-height: 900px;
 }
 
 .titleArea {
