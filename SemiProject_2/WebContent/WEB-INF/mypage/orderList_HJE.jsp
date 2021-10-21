@@ -156,7 +156,7 @@
 				 ,"date2":"${requestScope.date2}"},   
 			dataType:"JSON",
 			success:function(json) {
-				
+				console.log(json);
 				var html = "";
 				
 				if( json.length == 0) {
@@ -189,7 +189,7 @@
 					 html += 	"</td>"+
 								"<td class='verticalM' align='center'>"+item.totalquantity+"</td>"+
 								"<td class='verticalM' align='center'><strong>"+(item.odrtotalprice).toLocaleString('en')+" 원</strong></td>"+
-								"<td class='verticalM' align='center'>"+(item.odrtotalprice*0.1).toLocaleString('en')+" POINT</td>"+
+								"<td class='verticalM' align='center'>"+ Math.floor((item.odrtotalprice*0.01)).toLocaleString('en')+" POINT</td>"+
 								"<td class='verticalM' align='center'><a href='<%= ctxPath %>/mypage/orderDetailList.go?userid=${sessionScope.loginuser.userid}&odrcode="+item.fk_odrcode+"' class='btn btn-outline-dark btn-sm' role='button'>보기</a></td>"+
 <%--  							"<td class='verticalM' align='center'><a href='<%= ctxPath %>/mypage/orderDetailList.go?userid=leess&odrcode="+item.fk_odrcode+"'  class='btn btn-outline-dark btn-sm' role='button'>보기</a></td>"+ --%>
 							 "</tr>";
@@ -216,7 +216,7 @@
 				 ,"date4":"${requestScope.date4}"},   
 			dataType:"JSON",
 			success:function(json) {
-				
+				console.log(json);
 				var html = "";
 				
 				if( json.length == 0) {

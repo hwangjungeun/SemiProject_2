@@ -27,7 +27,7 @@ public class OrderListAction extends AbstractController {
 			super.setViewPage("/WEB-INF/member/memberRegister.jsp");
 		}
 		else {  */
-		
+			
 
 			HttpSession session = request.getSession();
 			
@@ -148,12 +148,10 @@ public class OrderListAction extends AbstractController {
 			
 			// 총 주문 개수 구하기 시작 //
 			int allorder = odao.getCountAllOrder(paraMap);
-			System.out.println(allorder);
 			request.setAttribute("allorder", allorder);
 			
 			// 총 취소주문 개수 구하기 시작 //
 			int cancelorder = odao.getCountCancelOrder(paraMap);
-			System.out.println(cancelorder);
 			request.setAttribute("cancelorder", cancelorder);
 			
 //		}
