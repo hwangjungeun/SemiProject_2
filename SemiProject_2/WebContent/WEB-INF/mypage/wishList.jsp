@@ -422,7 +422,7 @@
 			
 			<!-- 장바구니에 POST방식으로 넘기기 위한 폼태그 시작 -->
 			<form name="WishListFrm">
-				<input type="hidden" name="opseq" value="" />
+				<input type="hidden" name="opseq" value="" /><input type="hidden" name="where" value="1" /> <!-- 채은님 요청사항 -->
 			</form>
 			<!-- 장바구니에 POST방식으로 넘기기 위한 폼태그 끝 -->
 			
