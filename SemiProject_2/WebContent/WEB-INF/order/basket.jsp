@@ -448,7 +448,7 @@
 				<tbody>
 					<tr>
 						<td rowspan="2" ><h3>혜택정보</h3></td>
-						<td id="second" colspan="9" style="text-align:left">${sessionScope.loginuser.name}님의 가용적립금은 sessionScope.loginuser.point 입니다.</td>
+						<td id="second" colspan="9" style="text-align:left">${sessionScope.loginuser.name}님의 가용적립금은 ${requestScope.usablePoint}입니다.</td>
 					</tr>
 				</tbody>
 			</table>

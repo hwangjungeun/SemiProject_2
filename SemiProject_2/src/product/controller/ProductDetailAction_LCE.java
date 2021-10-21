@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
 import member.model.MemberVO_OHJ;
+import member.model.MemberVO_PJW;
 import product.model.InterProductDAO_LCE;
 import product.model.OptionVO_LCE;
 import product.model.ProductDAO_LCE;
@@ -54,13 +55,15 @@ public class ProductDetailAction_LCE extends AbstractController {
 
 				// 최근본상품 리스트에 해당 제품을 insert/update해야함.
 				HttpSession session = request.getSession();
-				MemberVO_OHJ loginuser = (MemberVO_OHJ)session.getAttribute("loginuser");
-				String userid = loginuser.getUserid();
+				MemberVO_PJW loginuser = (MemberVO_PJW)session.getAttribute("loginuser");
+				String userid = "";
+				if( loginuser != null) {
+					userid = loginuser.getUserid();
 				//String userid = "eomjh"; // ########################뿌잉###########################
+					pdao.insertRecentViewProd(userid,pseq);
+					request.setAttribute("fk_userid", userid); // 뷰단에서 주문 및 위시리스트에 insert할 때 필요함.
+				}
 				
-				pdao.insertRecentViewProd(userid,pseq);
-				
-				request.setAttribute("fk_userid", userid); // 뷰단에서 주문 및 위시리스트에 insert할 때 필요함.
 				
 				
 				request.setAttribute("pvo",pvo); // 상품정보가져오기
