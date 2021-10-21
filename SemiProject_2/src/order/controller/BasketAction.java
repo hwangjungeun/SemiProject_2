@@ -69,8 +69,8 @@ public class BasketAction extends AbstractController {
 				paraMap.put("loginuserid", userid);
 				paraMap.put("oqty", String.valueOf(oqty));
 				
-				//String where = request.getParameter("where"); // 1번 위시리스트 2번 최근 본 상품
-				String where = "2"; // 1번 위시리스트 2번 최근 본 상품
+				String where = request.getParameter("where"); // 1번 위시리스트 2번 최근 본 상품
+				//String where = "2"; // 1번 위시리스트 2번 최근 본 상품
 				
 				
 				if( "1".equals(where)) {
@@ -99,6 +99,7 @@ public class BasketAction extends AbstractController {
 		//회원의 가용적립금 알아오기 
 		int usablePoint = pdao.getusablePoint(userid);
 		
+		super.getBasketCnt(request);
 		
 		System.out.println("확인용 usablePoint => " + usablePoint );
 		/* 확인용 => 넘어옴 
