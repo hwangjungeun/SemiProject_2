@@ -234,7 +234,7 @@
 			
 			<!-- 장바구니에 POST방식으로 넘기기 위한 폼태그 -->
 			<form name="RecentViewProdFrm">
-				<input type="hidden" name="opseq" value="" />
+				<input type="hidden" name="opseq" value="" /><input type="hidden" name="where" value="2" /> <!-- 채은님 요청사항 -->
 			</form>
 
 			<!-- 최근본상품 리스트 테이블 끝 -->
