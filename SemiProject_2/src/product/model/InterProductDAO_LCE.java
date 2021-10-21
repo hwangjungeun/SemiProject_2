@@ -79,5 +79,8 @@ public interface InterProductDAO_LCE {
     // 상세페이지에서 해당옵션번호를 위시리스트에 insert/update해야함.
     boolean insertWishList(String fk_userid, String fk_opseq) throws SQLException;
 
+  //회원의 가용적립금 알아오기
+	int getusablePoint(String userid) throws SQLException;
+
 	
 }

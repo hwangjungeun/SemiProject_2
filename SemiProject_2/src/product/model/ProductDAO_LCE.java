@@ -1166,6 +1166,38 @@ public class ProductDAO_LCE implements InterProductDAO_LCE {
 		return n;
 		
 	}// end of public int insertDelete(Map<String, String> paraMap)
+
+	
+	//회원의 가용적립금 알아오기(장바구니페이지)
+	@Override
+	public int getusablePoint(String userid) throws SQLException {
+		int usablePoint = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = " select sum(point) " + 
+							" from tbl_point " + 
+							" where fk_userid= ? and p_status = 0 and " +
+							" ((sysdate - start_day) >=0 and (end_day-sysdate) > 0) ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userid);
+		
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			usablePoint = rs.getInt(1);
+			
+		}
+		finally {
+			close();
+		}
+		
+		
+		return usablePoint;
+	}// end of public int getusablePoint(String userid)
 	
 	  
 }

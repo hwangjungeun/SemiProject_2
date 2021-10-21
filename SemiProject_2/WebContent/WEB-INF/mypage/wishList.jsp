@@ -155,7 +155,7 @@
 		
 		// 삭제하고 난 이후에는 웹브라우저창을 새로고침해야하는데, history.go(0)이 아닌 wishList.go로 가서 페이지바를 새로 가져온다.
 	//	location.href = "javascript:history.go(0)";
-		location.href = "<%= request.getContextPath()%>/mypage/wishList.go";
+		location.href = "<%= request.getContextPath()%>/mypage/wishList.go?userid=${sessionScope.loginuser.userid}";
 		 
 	}// end of function deleteWishList(wishseq)---------------------------------------------------
 	
@@ -285,7 +285,7 @@
 	
 		// 삭제하고 난 이후에는 웹브라우저창을 새로고침해야하는데, history.go(0)이 아닌 wishList.go로 가서 페이지바를 새로 가져온다.
 	//	location.href = "javascript:history.go(0)";
-		location.href = "<%= request.getContextPath()%>/mypage/wishList.go";
+		location.href = "<%= request.getContextPath()%>/mypage/wishList.go?userid=${sessionScope.loginuser.userid}";
 		
 	}// end of function deleteCheckboxWishList()--------------------------------
 	
@@ -322,7 +322,7 @@
 		
 	// 삭제하고 난 이후에는 웹브라우저창을 새로고침해야하는데, history.go(0)이 아닌 wishList.go로 가서 페이지바를 새로 가져온다.
 	//	location.href = "javascript:history.go(0)";
-		location.href = "<%= request.getContextPath()%>/mypage/wishList.go";	
+		location.href = "<%= request.getContextPath()%>/mypage/wishList.go?userid=${sessionScope.loginuser.userid}";	
 			
 	}// end of function deleteAllWishList()----------------------------------------
 	
