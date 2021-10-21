@@ -17,7 +17,7 @@ public class QnaReplyAction extends AbstractController {
 		  String userid = "admin";
 		  String method = request.getMethod();
 		
-		  // 관리자 로그인 시에만 글 수정이 가능 하도록 한다 //
+		  // 관리자 로그인 시에만 글 답변이 가능 하도록 한다 //
 	      HttpSession session = request.getSession();
 	      
 	      MemberVO_PJW loginuser = (MemberVO_PJW) session.getAttribute("loginuser");

@@ -254,8 +254,6 @@ $(document).ready(function(){
     <c:if test = "${(sessionScope.loginuser).userid == 'admin' }">
 		 <button id="reply" type="button">답글</button>
 	</c:if>  
-   
-
 </div>
 
 </div>

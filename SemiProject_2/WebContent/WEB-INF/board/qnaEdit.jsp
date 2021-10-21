@@ -181,7 +181,7 @@ button.btn {
 			  	</tr>
 			</thead>
 		    <tbody>
-		    <tr>
+		       <tr>
 			      <td style="font-weight: bold;">글번호&nbsp;<span class="star">*</span></td>
 			      <td style="text-align: left;">
 				      <input type="text" id="board_num" name="board_num" value="${requestScope.board_num}" disabled="disabled"/>
@@ -191,7 +191,7 @@ button.btn {
 			   <tr>
 			      <td style="font-weight: bold;">아이디&nbsp;<span class="star">*</span></td>
 			      <td style="text-align: left;">
-				      <input type="text" id="board_id" name="board_id" value="${requestScope.board_id}" disabled="disabled"/>&nbsp;&nbsp;
+				      <input type="text" id="board_id" name="board_id" value="${requestScope.board_id}" disabled="disabled"/>
 				      <span id="idcheckResult"></span>
 			      </td> 
 			   </tr>
