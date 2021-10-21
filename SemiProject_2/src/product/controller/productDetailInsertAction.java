@@ -20,8 +20,8 @@ public class productDetailInsertAction extends AbstractController {
 		
 		//super.goBackURL(request);
 
-		/*
 		boolean bool = checkLogin(request);
+				
 		
 		if(!bool) {
 			
@@ -34,8 +34,7 @@ public class productDetailInsertAction extends AbstractController {
 			
 			return;
 		}
-		*/
-		//else {
+		else {
 		//1-2 로그인을 한 상태 장바구니 테이블에 존재하면 update 아니면 insert
 		
 			JSONObject jsonObj = new JSONObject(); // json으로 결과값 넘겨줄 것
@@ -74,15 +73,22 @@ public class productDetailInsertAction extends AbstractController {
 					
 					int n = pdao.insertBasket(paraMap); //가져온 값들로 장바구니 테이블에 insert해줌 
 					
-					if(n == 1) {
-						jsonObj.put("message", "장바구니에 추가하였습니다.");
-						jsonObj.put("check","1"); // 정상접근 정상추가(n=1) : view단에서 location href: basket.go로 잡아주기
+					if( n != 1) {
+						bool = false;
+						break;
 					}
-					else {
-						jsonObj.put("message", "장바구니에 추가할 수 없습니다.");
-						jsonObj.put("check","0"); // 정상 접근 비정상 추가(n=0) : view단에서 location href: javascript:history.back()으로 잡아주기??? 
-					}
+				}// end of for 
+				
+				
+				if(bool) {
+					jsonObj.put("message", "장바구니에 추가하였습니다.");
+					jsonObj.put("check","1"); // 정상접근 정상추가(n=1) : view단에서 location href: basket.go로 잡아주기
 				}
+				else {
+					jsonObj.put("message", "장바구니에 추가할 수 없습니다.");
+					jsonObj.put("check","0"); // 정상 접근 비정상 추가(n=0) : view단에서 location href: javascript:history.back()으로 잡아주기??? 
+				}
+				
 			}
 			else { //GET방식 (비정상적인 접근)
 				
@@ -90,13 +96,15 @@ public class productDetailInsertAction extends AbstractController {
 				jsonObj.put("check","0");  // 비정상접근 (n=2) : view단에서 location href: javascript:history.back()으로 잡아주기 
 				
 			}
+
+			String json = jsonObj.toString();
 			
-			request.setAttribute("json", jsonObj);
+			request.setAttribute("json", json);
 			
 			super.setViewPage("/WEB-INF/jsonview.jsp");
 			
 		
-		//}
+		}
 	}// end of public void execute(HttpServletRequest request, HttpServletResponse response)
 
 }

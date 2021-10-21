@@ -58,7 +58,7 @@ public class BestDivJSONAction extends AbstractController {
 			
 			request.setAttribute("json", json);
 			
-			super.setViewPage("/WEB-INF/jsonview_LCE.jsp");
+			super.setViewPage("/WEB-INF/jsonview.jsp");
 			
 		}
 		else {
@@ -67,7 +67,7 @@ public class BestDivJSONAction extends AbstractController {
 			
 			request.setAttribute("json", json);
 			
-			super.setViewPage("/WEB-INF/jsonview_LCE.jsp");
+			super.setViewPage("/WEB-INF/jsonview.jsp");
 			
 		}
 		

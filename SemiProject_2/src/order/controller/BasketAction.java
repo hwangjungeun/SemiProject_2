@@ -14,26 +14,36 @@ import product.model.ProductDAO_LCE;
 
 import common.controller.AbstractController;
 import member.model.MemberVO_HJE;
+import member.model.MemberVO_PJW;
 
 public class BasketAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		//super.getBasketCnt(request);// 다른 페이지들도 다 넣어야지 장바구니 갯수 볼 수 있음 !!
+//		super.getBasketCnt(request);// 다른 페이지들도 다 넣어야지 장바구니 갯수 볼 수 있음 !!
+		
+		String method = request.getMethod(); // "GET" 또는 "POST"
+		
+		System.out.println("방식: " + method);
 		
 		// 로그인한 회원정보(아이디) 받아오기
 		//HttpSession session = request.getSession();
-		//String loginuser = (String) session.getAttribute("loginuser");
-		String loginuserid = "leess";  //테스트용 kimmk 0개 leess 6개
-		
-		String method = request.getMethod(); // "GET" 또는 "POST"
+		//MemberVO_PJW loginuserid = (MemberVO_PJW) session.getAttribute("loginuser");
+		//String userid = loginuserid.getUserid();
+		String userid = "eomjh";
+		//String loginuserid = "leess";  //테스트용 kimmk 0개 leess 6개
 		
 		InterProductDAO_LCE pdao = new ProductDAO_LCE();
 
 		if("POST".equalsIgnoreCase(method)) {  // POST: 위시리스트에서 온 경우 => insert & delete 
+		
+
+			//System.out.println("확인용 loginuserid => " + loginuserid);
 
 			String opseq = request.getParameter("opseq"); //옵션 번호 받아옴 
+			System.out.println("확인용opseq =>"+ opseq);
+			
 		
 			int oqty = 1; // 위시리스트에서 수량을 정하지 않으므로 디폴트값을 1로 줌 
 			
@@ -46,10 +56,19 @@ public class BasketAction extends AbstractController {
 				
 				Map<String,String> paraMap = new HashMap<>();
 				paraMap.put("opseq", opseqArr[i]);
-				paraMap.put("loginuserid", loginuserid);
+				paraMap.put("loginuserid", userid);
 				paraMap.put("oqty", String.valueOf(oqty));
 				
-				isSuccess = pdao.insertDelete(paraMap);
+				//String where = request.getParameter("where"); // 1번 위시리스트 2번 최근 본 상품
+				String where = "2"; // 1번 위시리스트 2번 최근 본 상품
+				
+				
+				if( "1".equals(where)) {
+					isSuccess = pdao.insertDelete(paraMap); // 위시리스트에서 삭제
+				}
+				else if( "2".equals(where)) {
+					isSuccess = pdao.insertDeleteR(paraMap); // 최근본상품에서 삭제 
+				}
 				
 				if( isSuccess != 1 ) {
 					request.setAttribute("message", "장바구니에 담을 수 없습니다.");
@@ -60,11 +79,12 @@ public class BasketAction extends AbstractController {
 				}// end of if
 				
 			}// end of for
+			
 		}
 		// GET: index.go에서 장바구니버튼 클릭시 혹은 상세페이지에서 장바구니버튼 클릭시(ajax로 넣어주고 여기로 href사용) 단순 select만 해오면 됨 
 		
 		//회원아이디로 장바구니에서 상품들 조회해오기 
-		List<CartVO_LCE> cartList = pdao.selectBasket(loginuserid);
+		List<CartVO_LCE> cartList = pdao.selectBasket(userid);
 		
 		/* 확인용 => 넘어옴 
 		if(cartList.size() != 0) {

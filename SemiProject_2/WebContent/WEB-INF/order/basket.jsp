@@ -170,7 +170,7 @@
 			
 			// update를 위해 보내주기
 			$.ajax({
-				url:"/Semi_Project/order/updateThis.go",
+				url:"/SemiProject_1/order/updateThis.go",
 				data:{"cartseq":cartseq,
 					  "oqty":oqty},
 				method:"POST",
@@ -316,7 +316,7 @@
 			var cartseq =  $target.val(); 								// 해당 cartseq가져오기
 			
 			$.ajax({
-				url:"/Semi_Project/order/deleteThis.go",
+				url:"/SemiProject_1/order/deleteThis.go",
 				data:{"cartseq":cartseq},
 				method:"POST",
 				success:function(){
@@ -359,7 +359,7 @@
 				$("input:hidden[name=cartseq]").val(cartseq);
 				
 				$.ajax({
-					url:"/Semi_Project/order/deleteThis.go",
+					url:"/SemiProject_1/order/deleteThis.go",
 					data:{"cartseq":cartseq},
 					success:function(){
 						//console.log("성공"); // 일단 확인용 
@@ -397,13 +397,15 @@
 			
 			var cartseq = cartseqArr.join();
 			
+			console.log("확인용 =>" +cartset);
+			
 			$("input:hidden[name=cartseq]").val(cartseq);
 			
 			//cartseq = $("input:hidden[name=cartseq]").val();
 			
 			
 			$.ajax({
-				url:"/Semi_Project/order/deleteThis.go",
+				url:"/SemiProject_1/order/deleteThis.go",
 				data:{"cartseq":cartseq},
 				success:function(){
 					//console.log("성공"); // 일단 확인용 
@@ -440,17 +442,18 @@
 
 
 	<!-- 로그인시 회원정보 시작 로그인유저받와서함 근데 적립금도 필요한데 그러면 abstract에서 해야하나?-->
-	<%--<c:if test="${not empty sessionScope.loginuser}"></c:if>--%>
+	<!--<c:if test="${not empty sessionScope.loginuser}">-->
 		<div class="table-responsive">
 			<table class="table usertbl">
 				<tbody>
 					<tr>
 						<td rowspan="2" ><h3>혜택정보</h3></td>
-						<td id="second" colspan="9" style="text-align:left">${sessionScope.loginuser.name}님의 가용적립금은 ${sessionScope.loginuser.point} 입니다.</td>
+						<td id="second" colspan="9" style="text-align:left">${sessionScope.loginuser.name}님의 가용적립금은 sessionScope.loginuser.point 입니다.</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+	<!--</c:if>-->
 	<!-- 로그인시 회원정보 끝-->
 
 
@@ -554,6 +557,13 @@
 		                                	<c:set var="deliveryFee" value="0" />
 		                                 	&nbsp;<Strong>
 		                                 		${delivery}(무료배송)
+		                                 	</Strong>
+		                              </c:when>
+		                              <c:when test="${sum eq 0}">
+		                                	<c:set var="delivery" value="0원" />
+		                                	<c:set var="deliveryFee" value="0" />
+		                                 	&nbsp;<Strong>
+		                                 		${delivery}
 		                                 	</Strong>
 		                              </c:when>
 		                              <c:otherwise>

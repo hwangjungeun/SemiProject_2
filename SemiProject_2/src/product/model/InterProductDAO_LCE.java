@@ -68,6 +68,8 @@ public interface InterProductDAO_LCE {
 	// 장바구니 페이지에 저장, 위시리스트에서 삭제하기 ( 위시리스트->장바구니로 넘어올때)
 	int insertDelete(Map<String, String> paraMap) throws SQLException;
 
+	// 장바구니 페이지에 저장, 최근본 목록 에서 삭제하기 ( 최근 본 목록 ->장바구니로 넘어올때)
+	int insertDeleteR(Map<String, String> paraMap) throws SQLException;
 
 	////////// 현지님 //////////////////////
 	

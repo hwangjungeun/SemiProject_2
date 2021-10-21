@@ -119,7 +119,7 @@
 		console.log(cuseq);
 				
 		$.ajax({
-			url:"/SemiProject/product/bestDivJSON.go",
+			url:"/SemiProject_1/product/bestDivJSON.go",
 			data:{"cuseq":cuseq
 				 ,"cnt":cnt},
 			dataType:"JSON",
@@ -130,9 +130,9 @@
 				$.each(json, function(index,item){
 					// 이부분 수정해야함 
 					html += "<li class='bestitem' style='list-style-type:none; margin:7px; float: left;'>" +
-							 "<a href ='/SemiProject/product/productDetail.go?pseq=" + item.pseq + "'>" +
+							 "<a href ='/SemiProject_1/product/productDetail.go?pseq=" + item.pseq + "'>" +
 						    	"<div class='box mb-2' style='width:260px; height:260px;'>"+
-						   			"<img class='pimage card-img-top' style='opacity:1.0; height:260px;' src='/SemiProject/images/"+ item.pimage+"' alt='...'>" +
+						   			"<img class='pimage card-img-top' style='opacity:1.0; height:260px;' src='/SemiProject_1/images/"+ item.pimage+"' alt='...'>" +
 						   			"<div class='pname' style='display:none; margin:-50px; font-size:17px; font-weight:bold;'>"+ item.pname +"</div>" +
 			     				 "</div>" +
 							  "</a>" +

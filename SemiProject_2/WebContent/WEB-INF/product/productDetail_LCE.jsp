@@ -147,7 +147,7 @@
 			else{
 				
 				$.ajax({
-					url:"/SemiProject/order/productDetailInsert.go",
+					url:"/SemiProject_1/product/productDetailInsert.go",
 					type:"POST",
 					data:{"opseq":opseq,
 						  "oqty":oqty},
