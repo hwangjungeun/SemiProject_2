@@ -10,7 +10,7 @@ import member.model.MemberVO_KMK;
 public interface InterBoardDAO {
 
 	// QNA 게시판 글 목록 보여주기
-	List<BoardVO> selectPagingboard() throws SQLException;
+	List<BoardVO> selectPagingboard(String keyword, String type) throws SQLException;
 
 	// 글 작성시키는 메소드
 	void register(String board_id, String board_subject, String board_content) throws SQLException;

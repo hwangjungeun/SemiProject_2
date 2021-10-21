@@ -678,6 +678,8 @@ public class ProductDAO_LCE implements InterProductDAO_LCE {
 	@Override
 	public int insertBasket(Map<String, String> paraMap) throws SQLException {
 		
+		
+		
 		int n = 0;
 		
 		try {
@@ -706,7 +708,7 @@ public class ProductDAO_LCE implements InterProductDAO_LCE {
 				
 				n = pstmt.executeUpdate();
 				
-				System.out.println("dao1 n값" + n);
+				System.out.println("장바구니 기능 확인중! insert중  1번");
 			}
 			else { // 장바구니에 존재하지 않아 새로 추가하는 경우
 				
@@ -722,7 +724,7 @@ public class ProductDAO_LCE implements InterProductDAO_LCE {
 				
 				n= pstmt.executeUpdate();
 				
-				System.out.println("dao2 n값" + n);
+				System.out.println("장바구니 기능 확인중! insert중  2번");
 			}
 			
 		} finally {
@@ -759,6 +761,7 @@ public class ProductDAO_LCE implements InterProductDAO_LCE {
 			
 			if(rs.next()) { // 이거 안해도됨 딱히 
 				pseq = rs.getInt(1);
+				System.out.println("장바구니 기능 확인중! select중 ");
 			}
 			
 		} finally {
@@ -1113,7 +1116,47 @@ public class ProductDAO_LCE implements InterProductDAO_LCE {
 				pstmt.setString(2, paraMap.get("opseq"));
 				
 				n = pstmt.executeUpdate();
+				
+				System.out.println("위시 -> 장바구니 기능 확인중 3번 delete중!");
+			}
+			
+		} finally {
+			close();
+		}
+		
+		return n;
+		
+	}// end of public int insertDelete(Map<String, String> paraMap)
 
+	// 장바구니 페이지에 저장, 최근본 목록 에서 삭제하기 ( 최근 본 목록 ->장바구니로 넘어올때)
+	@Override
+	public int insertDeleteR(Map<String, String> paraMap) throws SQLException {
+		
+		int n = 0;
+		
+		try {
+			
+			// 먼저 해당 상품 제품번호 가져옴 
+			int pseq = selectPseq(paraMap.get("opseq"));
+			paraMap.put("fk_pseq", String.valueOf(pseq));
+			
+			// 장바구니 추가해줌 
+			n = insertBasket(paraMap);
+			
+			if(n == 1) { // 장바구니 담기에 성공하면 위시리스트에서 삭제 
+				
+				conn = ds.getConnection(); //이거 중복해도 되는건가?
+				
+				String sql = " delete from tbl_recentViewProduct "+
+							 " where fk_userid = ? and fk_pseq = ? ";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, paraMap.get("loginuserid"));
+				pstmt.setString(2, paraMap.get("fk_pseq"));
+				
+				n = pstmt.executeUpdate();
+				
+				System.out.println("최근 -> 장바구니 기능 확인중 3번 delete중!");
 			}
 			
 		} finally {

@@ -59,14 +59,14 @@ public class BestPageJSONAction extends AbstractController {
 			
 			String json = jsonArr.toString();
 			request.setAttribute("json", json);
-			super.setViewPage("/WEB-INF/jsonview_LCE.jsp");
+			super.setViewPage("/WEB-INF/jsonview.jsp");
 			
 		}
 		else {
 			
 			String json = jsonArr.toString();
 			request.setAttribute("json", json);
-			super.setViewPage("/WEB-INF/jsonview_LCE.jsp");
+			super.setViewPage("/WEB-INF/jsonview.jsp");
 		}
 	}
 

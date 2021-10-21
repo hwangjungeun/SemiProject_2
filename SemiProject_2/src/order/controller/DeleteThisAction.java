@@ -35,7 +35,7 @@ public class DeleteThisAction extends AbstractController {
 			pdao.deleteBasket(cartseq); // 장바구니테이블에서 삭제하기
 		}
 		
-		request.setAttribute("cartseq",cartseq); //이거는 왜 있는건지?
+		//request.setAttribute("cartseq",cartseq); //이거는 왜 있는건지?
 		//request.setAttribute("loginuserid",userid);
 		//System.out.println("cartseq확인" + cartseq);
 		

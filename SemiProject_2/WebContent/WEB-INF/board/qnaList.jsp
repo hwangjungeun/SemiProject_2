@@ -98,12 +98,12 @@ input {
     font-size: 12px;
 }
 
-select#sizePerPage {
+select#search_key {
 	display: inline-block;
     min-width: 50px;
     height: 22px;
     line-height: 22px;
-    margin: 0 2 0 0px;
+    margin-left: 75px;
     padding: 0 0 0 5px;
     color: #333;
     border: 1px #d5d5d5 solid;
@@ -246,22 +246,16 @@ span.button {
      
      	<br><br>
      
-	     <form name="memberFrm">
+	     <form name="memberFrm" action="<%=ctxPath%>/board/qnaList.go">
 	     	<p> 
-		      <select id="searchType" name="searchType">
+		      <select id="search_key" name="type">
 		         <option value="board_id">회원명</option>
 		         <option value="board_subject">제목</option>
 		         <option value="board_content">내용</option>
 		      </select>
 	      
-		      <input type="text" id="searchWord" name="searchWord" />
+		      <input type="text" id="search" name="keyword" />
 		      <button id="search" type="button" onclick="goSearch();">검색</button>
-		
-		      <select id="sizePerPage" name="sizePerPage">
-		         <option value="10">10</option>
-		         <option value="5">5</option>
-		         <option value="3">3</option>
-		      </select>
 		      
 		      <span class="button">	
 		         <a href="<%=ctxPath%>/board/qnaWrite.go">글작성</a> 
