@@ -324,7 +324,7 @@
 				method:"POST",
 				success:function(){
 					//console.log("성공"); // 일단 확인용 
-					javascript:history.go(0); // 다시 읽어오기 
+					location.href="/SemiProject_1/order/basket.go"; // 다시 읽어오기 
 				},
 				error: function(request, status, error){
 		            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
@@ -367,7 +367,7 @@
 					data:{"cartseq":cartseq},
 					success:function(){
 						//console.log("성공"); // 일단 확인용 
-						javascript:history.go(0); // 다시 읽어오기 
+						location.href="/SemiProject_1/order/basket.go"; // 다시 읽어오기 
 					},
 					error: function(request, status, error){
 			            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
@@ -419,7 +419,7 @@
 				data:{"cartseq":cartseq},
 				success:function(){
 					//console.log("성공"); // 일단 확인용 
-					javascript:history.go(0); // 다시 읽어오기 
+					location.href="/SemiProject_1/order/basket.go"; // 다시 읽어오기 
 				},
 				error: function(request, status, error){
 		            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);

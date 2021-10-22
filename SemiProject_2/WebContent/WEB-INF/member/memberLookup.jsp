@@ -168,10 +168,8 @@
 	
 	#myshopMain ul {
     display: flex;
-    margin: 0 auto;
     border: 5px #dfdfdf solid;
-    border-top: 2px #333 solid;
-    border-width :medium;
+    border-width: medium;
 	}
 	
 	#myshopMain .shopMain .box a {
