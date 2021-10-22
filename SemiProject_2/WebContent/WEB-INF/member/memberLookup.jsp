@@ -263,9 +263,9 @@
         
         <li class="shopMain board">
             <div class="box">
-                <a href="#">
-                    <h3>Board</h3>
-                    <p>내 게시물 관리</p>
+                <a href="<%= ctxPath%>/board/qnaList.go">
+                    <h3>Q &amp; A</h3>
+                    <p>Q &amp; A</p>
                 </a>
             </div>
         </li>

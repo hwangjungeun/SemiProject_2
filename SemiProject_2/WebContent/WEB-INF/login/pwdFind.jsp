@@ -97,8 +97,6 @@ a.navbar-brand {
 
 <form name="pwdFindFrm">
    
-  
-   
    <div class="topArea container-fluid navbar-header mx-auto text-center">
     <div class="container-fluid p-3" style="background-color: #ffe6e6;" ></div>
 				<a class="navbar-brand mx-auto mb-3">o H ! &nbsp; D a i L Y</a>
