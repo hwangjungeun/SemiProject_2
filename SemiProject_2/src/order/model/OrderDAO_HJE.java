@@ -367,7 +367,7 @@ public class OrderDAO_HJE implements InterOrderDAO_HJE {
 				pvo.setPname(rs.getString(3));
 				odvo.setPvo(pvo);
 				
-				odvo.setOdrprice(rs.getInt(4));
+				odvo.setOqty(rs.getInt(4));
 				odvo.setOdrprice(rs.getInt(5));
 				odvo.setDeliverstatus(rs.getInt(6));
 				odvo.setCancelstatus(rs.getInt(7));
