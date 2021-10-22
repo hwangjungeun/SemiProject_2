@@ -556,7 +556,7 @@
 	      <tr>
 			<td colspan="2"  class="text-center">
 				<button type="button" id="btnUpdate" class="btn btn-secondary  mt-3" onClick="goEdit();">회원정보수정</button>
-				<button type="button" id="btnCancle" class="btn btn-secondary  mt-3 ml-5" onClick="self.close()">취소</button>
+				<button type="button" id="btnCancle" class="btn btn-secondary  mt-3 ml-5" onClick="location.href='<%= ctxPath %>/index.go'">취소</button>
 			</td>
 		</tr>
 	      </tbody>
